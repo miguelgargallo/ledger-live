@@ -518,7 +518,7 @@
       "title" : "Le montant à geler ne peut pas être inférieur à 1."
     },
     "TronSendTrc20ToNewAccountForbidden" : {
-      "title" : "Envoyer des TRC-20 sur le nouveau compte ne l’activera pas.",
+      "title" : "Vous devez d’abord envoyer un minimum de 0,1 TRX à cette adresse avant de recevoir des tokens TRC20.",
       "description" : "Pour l’activer, envoyez d’abord des TRX ou TRC-10 sur le compte. Il pourra ensuite recevoir des TRC-20."
     },
     "TronUnexpectedFees" : {
@@ -716,6 +716,9 @@
     "StellarSourceHasMultiSign" : {
       "title" : "Désactivez le multisig pour envoyer des transactions Stellar"
     },
+    "StellarBurnAddressError" : {
+      "title" : "Un problème est survenu lors de l’ajout du compte Stellar"
+    },
     "ImageLoadFromGalleryError" : {
       "title" : "Échec du chargement de l’image depuis la galerie",
       "description" : "Veuillez réessayer avec une autre image."
@@ -758,7 +761,7 @@
       "title" : "Frais de priorité plus élevés que nécessaire. Vous pourriez payer trop cher."
     },
     "MaxFeeTooLow" : {
-      "title" : "Frais max. inférieurs au montant recommandé"
+      "title" : "Les frais maximaux sont inférieurs au montant recommandé"
     },
     "PriorityFeeHigherThanMaxFee" : {
       "title" : "Les frais de priorité max. doivent être inférieurs aux frais max."
@@ -1717,8 +1720,14 @@
         "subtitle" : "Confirmez le code sur votre {{productName}}."
       },
       "error" : {
-        "title" : "Échec du couplage",
-        "subtitle" : "Une erreur est survenue.\nVérifiez que le Bluetooth est activé et que votre {{productName}} est à proximité.",
+        "generic" : {
+          "title" : "Échec du couplage",
+          "subtitle" : "Une erreur est survenue.\nVérifiez que le Bluetooth est activé et que votre {{productName}} est à proximité."
+        },
+        "lockedDevice" : {
+          "title" : "Appareil verrouillé",
+          "subtitle" : "Déverrouillez votre {{ productName }} et réessayez."
+        },
         "retryCta" : "Réessayer"
       }
     }
@@ -1901,6 +1910,9 @@
     "noOpState" : {
       "title" : "Pas encore d’opérations ?",
       "desc" : "Il vous suffit d’envoyer des crypto-actifs à votre adresse bénéficiaire et d’attendre que l’app se synchronise."
+    },
+    "carousel" : {
+      "title" : "Pour vous"
     },
     "recommended" : {
       "title" : "Recommandé"
@@ -2350,8 +2362,8 @@
     "display" : {
       "title" : "Général",
       "desc" : "Configurez les paramètres de base de Ledger Live.",
-      "carousel" : "Visibilité du carrousel",
-      "carouselDesc" : "Affichez le carrousel sur le Portefeuille.",
+      "carousel" : "Recommandations",
+      "carouselDesc" : "Nous vous présenterons des cartes avec des conseils personnalisés et nos dernières offres exclusives.",
       "language" : "Langue d’affichage",
       "languageDesc" : "Choisissez la langue d’affichage de Ledger Live.",
       "region" : "Région",
@@ -2414,7 +2426,7 @@
     "accounts" : {
       "header" : "Comptes",
       "title" : "Comptes",
-      "desc" : "Gérer l’affichage des actifs dans l’app.",
+      "desc" : "Gérez l’affichage des actifs dans l’app.",
       "hideTokenCTA" : "Masquer le token",
       "showContractCTA" : "Afficher le contrat",
       "blacklistedTokens" : "Liste de tokens masqués",
@@ -2681,8 +2693,8 @@
       },
       "securityVerify" : {
         "title" : "Pour une sécurité optimale, nous vous recommandons de vérifier cette adresse avec votre appareil Ledger.",
-        "subtitle1" : "Vérifier votre adresse permet une sécurité optimale. L’adresse affichée sur votre appareil Ledger ne peut pas être corrompue.",
-        "subtitle2" : "En vérifiant votre adresse, vous pourrez confirmer que l’adresse qui apparaît sur votre appareil Ledger est identique à celle affichée dans Ledger Live.",
+        "subtitle1" : "Vérifiez votre adresse pour gagner en sécurité. L’adresse affichée sur votre Ledger ne peut pas être corrompue.",
+        "subtitle2" : "Confirmez que l’adresse qui apparaît sur votre appareil Ledger est identique à celle affichée dans Ledger Live.",
         "verifyCta" : "Vérifier mon adresse",
         "dontVerifyCta" : "Afficher mon adresse sans la vérifier"
       },
@@ -3259,7 +3271,7 @@
       "amount" : "Montant",
       "from" : "De",
       "to" : "À",
-      "infoTotalTitle" : "Débit total",
+      "infoTotalTitle" : "Total débité",
       "infoTotalDesc" : "Comprend le montant de la transaction et les frais de réseau choisis",
       "gasLimit" : "Limite de gaz",
       "gasPrice" : "Prix du gaz",
@@ -4690,6 +4702,9 @@
         "title" : "Candidats",
         "description" : "127 personnes élues par le vote de la communauté des détenteurs de tokens. Les votes sont mis à jour toutes les 6 heures."
       }
+    },
+    "receive" : {
+      "newAddressTRC20" : "Vous devez d’abord envoyer un minimum de 0,1 TRX à cette adresse pour l’activer."
     }
   },
   "stellar" : {
@@ -5454,7 +5469,8 @@
     "drawer" : {
       "title" : "Choisissez une image",
       "options" : {
-        "uploadFromPhone" : "Télécharger à partir de mon téléphone"
+        "uploadFromPhone" : "Choisir dans ma galerie d’images",
+        "selectFromNFTGallery" : "Choisir dans ma galerie de NFT"
       }
     },
     "cropImage" : "Recadrez l’image",
@@ -5479,6 +5495,9 @@
       "loading" : "Chargement de l’aperçu",
       "setPicture" : "Définir cette image",
       "editPicture" : "Modifier l’image"
+    },
+    "nftGallery" : {
+      "title" : "Mes NFT"
     }
   },
   "postOnboarding" : {
