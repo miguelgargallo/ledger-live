@@ -410,6 +410,9 @@
       "title" : "Desculpe, este aplicativo é necessário",
       "description" : "Desinstale o aplicativo Bitcoin ou Ethereum por último."
     },
+    "MaxFeeLow" : {
+      "title" : "A sua taxa máxima é muito baixa. Sua transação pode ficar pendente por um tempo"
+    },
     "NetworkDown" : {
       "title" : "Desculpe, a internet deve ter caído",
       "description" : "Verifique sua conexão de internet."
@@ -595,6 +598,9 @@
     "SourceHasMultiSign" : {
       "title" : "Desative a assinatura múltipla para enviar {{currencyName}}"
     },
+    "DustLimit" : {
+      "title" : "Quantia menor do que o limite de pó"
+    },
     "StratisDown2021Warning" : {
       "description" : "A blockchain Stratis evoluiu e pode não funcionar mais corretamente. Suporte à blockchain Stratis original foi mantido até 16 de outubro de 2021."
     },
@@ -744,6 +750,23 @@
     },
     "HederaAddAccountError" : {
       "title" : "Sua conta não foi adicionada. Tente Novamente."
+    },
+    "PriorityFeeTooLow" : {
+      "title" : "A taxa de prioridade é mais baixa do que a quantia recomendada"
+    },
+    "PriorityFeeTooHigh" : {
+      "title" : "A taxa de prioridade é mais alta do que o necessário. Você pode estar pagando mais que o necessário"
+    },
+    "MaxFeeTooLow" : {
+      "title" : "A taxa máxima é mais baixa do que o valor recomendado"
+    },
+    "PriorityFeeHigherThanMaxFee" : {
+      "title" : "A taxa de prioridade máxima não pode ser maior do que a taxa máxima"
+    },
+    "LockedDeviceError" : {
+      "title" : "Seu dispositivo está bloqueado",
+      "description" : "Desbloqueie seu dispositivo e tente novamente.",
+      "descriptionWithProductName" : "Desbloqueie sua {{ productName }} e tente novamente."
     }
   },
   "crash" : {
@@ -768,7 +791,8 @@
     "noInfos" : "A Ledger não acessa suas informações de localização."
   },
   "permissions" : {
-    "open" : "Abrir permissões do aplicativo"
+    "open" : "Abrir permissões do aplicativo",
+    "nearbyDevicesPermissionDenied" : "Para emparelhar com Bluetooth, autorize o aplicativo Ledger Live a procurar dispositivos próximos."
   },
   "fees" : {
     "speed" : {
@@ -1804,6 +1828,9 @@
         }
       }
     },
+    "appsStep" : {
+      "title" : "Aplicativos {{productName}}"
+    },
     "readyStep" : {
       "title" : "A {{productName}} está pronta"
     },
@@ -1815,7 +1842,7 @@
     "portfolio" : "Carteira",
     "accounts" : "Contas",
     "transfer" : "Transferência",
-    "manager" : "My Ledger",
+    "manager" : "Minha Ledger",
     "settings" : "Configurações",
     "platform" : "Live Apps",
     "discover" : "Discover",
@@ -2310,7 +2337,7 @@
     "resources" : "Recursos da Ledger",
     "display" : {
       "title" : "Geral",
-      "desc" : "Configurar as configurações gerais do Ledger Live.",
+      "desc" : "Ajuste as configurações gerais do Ledger Live.",
       "carousel" : "Visibilidade do carrossel",
       "carouselDesc" : "Permitir a visibilidade do carrossel no Portfólio",
       "language" : "Idioma de exibição",
@@ -2375,7 +2402,7 @@
     "accounts" : {
       "header" : "Contas",
       "title" : "Contas",
-      "desc" : "Gerenciar a exibição de ativos no aplicativo.",
+      "desc" : "Gerencie a exibição de ativos no aplicativo.",
       "hideTokenCTA" : "Ocultar token",
       "showContractCTA" : "Mostrar contrato",
       "blacklistedTokens" : "Lista de tokens ocultos",
@@ -2400,7 +2427,7 @@
     },
     "about" : {
       "title" : "Sobre",
-      "desc" : "Informações, termos e condições de aplicativo e política de privacidade.",
+      "desc" : "Informações, termos e condições do aplicativo e política de privacidade.",
       "appDescription" : "Com Ledger Live, proteja, compre, venda, negocie, cresça e gerencie seus criptoativos. Tudo em um só lugar.",
       "appVersion" : "Versão",
       "termsConditions" : "Termos e condições",
@@ -2435,14 +2462,19 @@
         "title" : "Mercado",
         "desc" : "Receber atualizações sobre mudanças significativas do mercado"
       },
-      "announcement" : {
+      "announcements" : {
         "title" : "Anúncios",
         "desc" : "Receba atualizações importantes do Ledger Live"
+      },
+      "recommendations" : {
+        "title" : "Recomendações",
+        "desc" : "Enriqueça a sua experiência com recomendações personalizadas e ofertas especiais"
       },
       "price" : {
         "title" : "Alertas de preço",
         "desc" : "Configure alertas de preços para suas moedas favoritas para que você não perca nenhuma movimentação de mercado"
-      }
+      },
+      "disclaimer" : "Privacidade de dados é fundamental na Ledger. Os dados coletados nunca são compartilhados com nossos parceiros"
     },
     "help" : {
       "title" : "Ajuda",
@@ -2470,8 +2502,8 @@
     },
     "experimental" : {
       "title" : "Recursos experimentais",
-      "desc" : "Experimente os recursos experimentais e nos conte o que achou.",
-      "disclaimer" : "Estes são recursos experimentais fornecidas tal como se encontram para nossa comunidade de entusiastas de tecnologia. Eles podem mudar, quebrar ou ser removidos a qualquer momento. Ao habilitá-los, você concorda em usá-los por sua própria conta e risco.",
+      "desc" : "Ative os recursos experimentais e nos conte o que achou.",
+      "disclaimer" : "Estes são recursos experimentais que fornecemos \"tal como se encontram\" para serem testados pela nossa comunidade de especialistas em tecnologia. Eles podem mudar, quebrar ou ser removidos a qualquer momento. Ao habilitá-los, você concorda em usá-los por sua conta e risco.",
       "experimentalFeatures" : {
         "experimentalIntegrations" : {
           "title" : "Integrações Experimentais",
@@ -2514,7 +2546,7 @@
     },
     "developer" : {
       "title" : "Desenvolvedor",
-      "desc" : "Experimente os recursos de desenvolvedores e nos informe o que você achou.",
+      "desc" : "Ative os recursos para desenvolvedores e nos conte o que você achou.",
       "customManifest" : {
         "title" : "Carregar o Manifesto da Plataforma Personalizada"
       }
@@ -2523,13 +2555,14 @@
       "featureFlagsTitle" : "Marcadores definidos usados no Ledger Live",
       "featureFlagsDesc" : "Valores sobrepostos serão redefinidos se o aplicativo for reexecutado. Apenas strings JSON válidas serão aceitas.",
       "featureFlagsEdit" : "Editar",
-      "featureFlagsRestore" : "Restaurar"
+      "featureFlagsRestore" : "Restaurar",
+      "firebaseProject" : "Projeto Firebase mirado por esta versão:"
     }
   },
   "notifications" : {
     "prompt" : {
       "title" : "Ligar Notificações",
-      "desc" : "Receba atualizações importantes sobre o Ledger Live, os produtos Ledger e segurança. Cancele a qualquer momento.",
+      "desc" : "Receba as últimas atualizações sobre o Ledger Live, os produtos da Ledger, o mercado e as recomendações personalizadas. Cancele a qualquer momento nas configurações",
       "allow" : "Permitir Notificações",
       "later" : "Talvez mais tarde"
     }
@@ -2630,13 +2663,13 @@
       "receiveConfirmation" : {
         "title" : "Receber {{currencyTicker}}",
         "addressVerified" : "Endereço Verificado",
-        "verifyAddress" : "Clique aqui para verificar seu endereço",
+        "verifyAddress" : "Toque aqui para verificar seu endereço",
         "adviceVerify" : "Recomendamos que você sempre verifique seu endereço com seu dispositivo Ledger",
         "sendWarning" : "Envie somente {{currencyName}} ({{currencyTicker}}) para este endereço. Enviar qualquer outra moeda pode resultar em perda permanente."
       },
       "securityVerify" : {
         "title" : "Por segurança, recomendamos verificar este endereço com seu dispositivo Ledger.",
-        "subtitle1" : "Verificar seu endereço lhe dá segurança. O endereço exibido em seu dispositivo Ledger não pode ser comprometido.",
+        "subtitle1" : "É mais seguro verificar seu endereço. O endereço exibido em seu dispositivo Ledger não pode ser adulterado.",
         "subtitle2" : "Ao verificar o endereço, você poderá confirmar que o endereço exibido em seu dispositivo é o mesmo que o endereço exibido no Ledger Live.",
         "verifyCta" : "Verificar meu endereço",
         "dontVerifyCta" : "Revelar meu endereço sem verificar"
@@ -2673,11 +2706,11 @@
     },
     "buy" : {
       "title" : "Comprar",
-      "description" : "Comprar cripto com segurança usando dinheiro"
+      "description" : "Compre cripto com dinheiro em segurança."
     },
     "sell" : {
       "title" : "Vender",
-      "description" : "Venda criptomoedas com segurança por dinheiro."
+      "description" : "Venda cripto por dinheiro em segurança"
     },
     "exchange" : {
       "title" : "Comprar / Vender"
@@ -3151,6 +3184,12 @@
       }
     }
   },
+  "signMessage" : {
+    "eip712" : {
+      "showFullMessage" : "Mostrar mensagem completa",
+      "hideFullMessage" : "Esconder mensagem completa"
+    }
+  },
   "sync" : {
     "error" : "Erro de sincronização",
     "loading" : "Sincronizar"
@@ -3212,9 +3251,14 @@
       "infoTotalDesc" : "Inclui a quantia da transação e as taxas da rede selecionadas",
       "gasLimit" : "Limite de gás",
       "gasPrice" : "Preço do gás",
+      "maxFee" : "Taxa máxima",
+      "maxPriorityFee" : "Taxa de prioridade máxima",
+      "nextBlock" : "Próximo bloco: {{nextBaseFee}}",
+      "suggestedPriorityFee" : "Sugerido {{lowPriorityFee}} - {{highPriorityFee}}",
       "maxFees" : "Taxas Máximas",
       "validateGasLimit" : "Validar limite de gás",
       "fees" : "Taxas",
+      "maxEstimatedFee" : "Taxa máxima estimada",
       "validateFees" : "Validar Taxas",
       "customizeFees" : "Personalizar Taxas",
       "memo" : {
@@ -3356,7 +3400,7 @@
     "selectValidator" : {
     },
     "castVotes" : {
-      "ranking" : "Ranking: <0>{{rank}}</0>",
+      "ranking" : "Posição: <0>{{rank}}</0>",
       "nbOfVotes" : "Número de votos {{amount}}",
       "percentage" : "Percentagem",
       "estYield" : "Rendimento Est.",
@@ -3462,7 +3506,7 @@
     }
   },
   "DeviceAction" : {
-    "stayInTheAppPlz" : "Fique no aplicativo Ledger Live e mantenha sua Nano X próximo a você",
+    "stayInTheAppPlz" : "Fique no aplicativo Ledger Live e mantenha a Ledger perto de você.",
     "allowAppPermission" : "Abra o aplicativo {{wording}} no seu dispositivo",
     "allowAppPermissionSubtitleToken" : "para gerenciar seus tokens {{token}}",
     "allowManagerPermission" : "Permitir {{wording}} em seu dispositivo",
@@ -3626,14 +3670,15 @@
     }
   },
   "manager" : {
-    "tabTitle" : "My Ledger",
-    "title" : "My Ledger",
+    "tabTitle" : "Minha Ledger",
+    "title" : "Minha Ledger",
     "selectDevice" : {
       "saved" : {
         "title" : "Dispositivos",
         "description" : "Gerencie suas Ledgers salvas"
       },
       "addNewCTA" : "Adicionar Novo",
+      "otgBanner" : "Se você tiver uma Nano S ou uma Nano S Plus, conecte seu dispositivo por cabo USB.",
       "connectExistingLedger" : "Conectar uma Ledger existente",
       "connectExistingLedgerDescription" : "Já tem uma Ledger configurada? Emparelhe-a com bluetooth",
       "setUpNewLedger" : "Configurar uma nova Ledger",
@@ -3785,7 +3830,7 @@
       "apply" : "Aplicar"
     },
     "sort" : {
-      "title" : "Ordem",
+      "title" : "Ordenar",
       "default" : "Padrão",
       "name_asc" : "Nome A-Z",
       "name_desc" : "Nome Z-A",
@@ -3889,7 +3934,7 @@
       "de" : "Deutsch",
       "tr" : "Türk",
       "ja" : "日本",
-      "ko" : "한국인",
+      "ko" : "한국어",
       "pt" : "Português"
     }
   },
@@ -3903,7 +3948,7 @@
     "languageInstalled" : "Idioma alterado para {{language}}",
     "firmwareUpdatePrompt" : {
       "title" : "Colocar sua {{deviceName}} em {{language}}?",
-      "description" : "{{language}} agora está disponível para sua {{deviceName}}. Você pode configurar agora ou mudar o idioma do seu dispositivo a qualquer momento no My Ledger."
+      "description" : "{{language}} agora está disponível para sua {{deviceName}}. Você pode configurar agora ou mudar o idioma do seu dispositivo a qualquer momento em Minha Ledger."
     },
     "installingLanguage" : "Instalando Idioma",
     "languages" : {
@@ -5130,7 +5175,7 @@
       "wantToSell" : "Quero Vender",
       "connectDevice" : "Conecte seu dispositivo",
       "title" : "Venda criptos com nossos parceiros",
-      "description" : "Venda criptoativos diretamente de sua conta Ledger via Coinify e receba em moeda fiduciária na sua conta bancária.",
+      "description" : "Venda criptoativos diretamente da sua conta Ledger pela Coinify e receba em fiat na sua conta bancária.",
       "CTAButton" : "Vender agora",
       "emptyState" : {
         "title" : "Sem conta {{currency}}",
@@ -5258,7 +5303,7 @@
   "market" : {
     "title" : "Mercado",
     "filters" : {
-      "sort" : "Ordem",
+      "sort" : "Ordenar",
       "filter" : "Filtrar",
       "view" : {
         "label" : "Ver",
@@ -5269,12 +5314,12 @@
       },
       "order" : {
         "topGainers" : "Maiores altas",
-        "market_cap" : "Ranking",
-        "market_cap_asc" : "Ranking ascendente (cap. de mercado)",
-        "market_cap_desc" : "Ranking descendente (cap. de mercado)"
+        "market_cap" : "Posição",
+        "market_cap_asc" : "Posição ascendente (valor de mercado)",
+        "market_cap_desc" : "Posição descendente (valor de mercado)"
       },
       "currency" : "Moeda",
-      "time" : "Tempo",
+      "time" : "Alteração",
       "apply" : "Aplicar"
     },
     "marketList" : {
@@ -5324,8 +5369,8 @@
       "clickOnStarIcon" : "Selecione o ícone de estrela ao lado de um ativo para adicioná-lo automaticamente aos seus favoritos.",
       "browseAssets" : "Pesquisar Ativos",
       "starred" : {
-        "title" : "Rastreie seus ativos favoritos!",
-        "desc" : "Para adicionar um ativo aos seus favoritos automaticamente, clique no ícone de estrela próximo a ele"
+        "title" : "Acompanhe seus ativos favoritos!",
+        "desc" : "Adicione um ativo aos seus favoritos clicando no ícone de \"estrela\" ao lado dele."
       }
     }
   },
@@ -5353,6 +5398,11 @@
       "viewOn" : "Ver em",
       "viewInExplorer" : "Ver no explorer",
       "txDetails" : "Detalhes da transação"
+    },
+    "modalDisabled" : {
+      "title" : "Função de enviar não disponível",
+      "body" : "A fim de cumprir com as recentes atualizações da Apple em sua App Store, o envio de NFTs está temporariamente indisponível. Você ainda pode usar o Ledger Live no desktop para enviar NFTs.",
+      "contactSupport" : "Leia nosso artigo de suporte para mais informações."
     }
   },
   "ApplicationVersion" : "v{{version}}",
@@ -5393,17 +5443,19 @@
     "cropImage" : "Cortar imagem",
     "chooseConstrast" : "Escolher contraste",
     "uploadAnotherImage" : "Enviar outra imagem",
-    "selectContrast" : "Selecione o contraste",
+    "rotateImage" : "Girar",
     "allowPreview" : "Permitir a visualização da imagem em {{productName}}",
     "loadingPicture" : "Carregando imagem em {{productName}}",
     "pictureLoaded" : "Foto carregada",
     "timeDisclaimer" : "Isso pode demorar até 30 segundos",
     "imageLoaded" : "Imagem carregada em {{productName}}",
     "confirmPicture" : "Confirme na {{productName}}",
-    "title" : "Escolha uma foto.\nCrie uma clima.\nTorne a sua Ledger só sua.",
-    "subtitle" : "Coloque uma foto do seu NFT favorito ou uma foto do seu telefone.",
+    "landingPage" : {
+      "title" : "Escolha uma foto.\nCrie uma clima.\nTorne a sua Ledger só sua.",
+      "subtitle" : "Coloque uma foto do seu NFT favorito ou uma foto do seu telefone.",
+      "choosePicture" : "Escolher uma foto"
+    },
     "customImage" : "Imagem personalizada",
-    "choosePicture" : "Escolha uma foto",
     "doThisLater" : "Talvez mais tarde"
   },
   "postOnboarding" : {
