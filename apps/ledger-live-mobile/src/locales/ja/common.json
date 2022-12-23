@@ -1482,7 +1482,7 @@
         "tooltip" : "Ledgerで表示されない",
         "title" : "Ledgerで「Protectで復元」が表示されないのはなぜですか？",
         "desc1" : "最も可能性の高い理由は、お使いのデバイスがProtectと互換性がないことです。ご心配ありません。それをお使いいただけるように、ぜひサポートさせていただきます。",
-        "desc2" : "Please contact us through and choose \"My Ledger doesn't display Restore with Protect\", we got you covered.",
+        "desc2" : "「My Ledgerに「Protectで復元」が表示されない（My Ledger does not display Restore with Protect）」を選択して、当社にご連絡ください。サポートさせていただきます。",
         "cta" : "マニュアル手順を実行する",
         "supportLink" : "Ledgerサポートへのお問い合わせ"
       }
@@ -5749,19 +5749,19 @@
           }
         },
         "confirmIdentity" : {
-          "title" : "Action required",
-          "desc" : "Confirm your identity and complete all tasks to protect your recovery phrase.",
+          "title" : "操作が必要です",
+          "desc" : "本人確認を行い、すべてのタスクを完了させてリカバリーフレーズを保護してください。",
           "actions" : {
-            "confirmNow" : "Confirm now",
-            "viewDetails" : "View details"
+            "confirmNow" : "今すぐ確認",
+            "viewDetails" : "詳細を表示"
           }
         },
         "addPayment" : {
-          "title" : "Action required",
-          "desc" : "Add a payment details and complete all tasks to protect your recovery phrase.",
+          "title" : "操作が必要です",
+          "desc" : "支払いの詳細を追加し、リカバリーフレーズの保護に必要な全行程を完了しましょう。",
           "actions" : {
-            "addNow" : "Add now",
-            "viewDetails" : "View details"
+            "addNow" : "今すぐ追加",
+            "viewDetails" : "詳細を表示"
           }
         },
         "paymentRejected" : {
@@ -5792,15 +5792,15 @@
   },
   "protect" : {
     "login" : {
-      "title" : "Log In",
-      "desc" : "Log in with your Ledger account to manage your Protect subscription.",
-      "email" : "Email",
-      "password" : "Password",
-      "cta" : "Login",
-      "forgotPassword" : "Forgot password?",
+      "title" : "ログイン",
+      "desc" : "Ledgerアカウントでログインすると、Protectサブスクリプションを管理できます。",
+      "email" : "メールアドレス",
+      "password" : "パスワード",
+      "cta" : "ログイン",
+      "forgotPassword" : "パスワードをお忘れですか？",
       "errors" : {
-        "emptyEmail" : "Email cannot be empty",
-        "emptyPassword" : "Password cannot be empty"
+        "emptyEmail" : "メールアドレスを入力してください",
+        "emptyPassword" : "パスワードを入力してください"
       }
     }
   }
