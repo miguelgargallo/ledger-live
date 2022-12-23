@@ -3395,15 +3395,15 @@
     "stake" : {
       "title" : "اكسب إيثريوم",
       "lido" : {
-        "tag" : "دون حد أدنى",
-        "description" : "قم بتكديس إيثريوم خاصتك مع Lido واكسب مكافآت يومية. دون فترة قَفل. دون حد أدنى."
+        "tag" : "ليس هناك حد أدنى",
+        "description" : "قم بتكديس إيثريوم خاصتك مع Lido واكسب مكافآت يومية. ليس هناك فترة قَفل. ليس هناك حد أدنى."
       },
       "kiln" : {
         "tag" : "يتطلب 32 ETH",
-        "description" : "لديك أكثر من 32 ETH؟ اكسب مكافآت يومية عن طريق تكديس ETH خاصتك بأمان مع Kiln."
+        "description" : "لديك أكثر من 32 ETH؟ اكسب مكافآت يومياً عن طريق تكديس ETH خاصتك بأمان مع Kiln."
       },
       "providerTitle" : "اكسب مع {{provider}}",
-      "providerLink" : "معرفة المزيد عن {{provider}}"
+      "providerLink" : "تعرف على المزيد عن {{provider}}"
     }
   },
   "near" : {
@@ -3698,7 +3698,7 @@
       "featureFlagsEdit" : "تعديل",
       "featureFlagsRestore" : "استعادة",
       "featureFlagsOverride" : "تجاوز",
-      "firebaseProject" : "Firebase project targeted by this build:",
+      "firebaseProject" : "مشروع Firebase الذي يستهدفه هذا الإصدار:",
       "addLocalApp" : "إضافة تطبيق محلي",
       "addLocalAppDesc" : "تصفح الملفات المحلية وقم بإضافة تطبيق محلي باستخدام بيان محلي",
       "addLocalAppButton" : "تصفح",
