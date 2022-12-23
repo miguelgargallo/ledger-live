@@ -1237,8 +1237,8 @@
       },
       "recovery" : "لديك عبارة استرداد بالفعل؟",
       "protect" : {
-        "label" : "~60 mins",
-        "subTitle" : "Restore with Protect"
+        "label" : "60 دقيقة تقريباً",
+        "subTitle" : "الاستعادة عن طريق Protect"
       }
     },
     "stepNewDevice" : {
@@ -1469,21 +1469,21 @@
           "label" : "تعرف على كيفية التفاعل مع جهازك من خلال قراءة التعليمات التي تظهر على الشاشة."
         },
         "1" : {
-          "title" : "Select “Restore”",
+          "title" : "اختر \"Restore [استعادة]\"",
           "label" : "اضغط على كلا الزرين في وقت واحد لتأكيد الاختيار."
         },
         "2" : {
-          "title" : "Select “Restore with Protect” mode",
+          "title" : "اختر وضع \"Restore with Protect [الاستعادة عن طريق Protect]\"",
           "label" : "اضغط على كلا الزرين في وقت واحد لتأكيد الاختيار."
         }
       },
       "nextStep" : "متابعة",
       "extraInfo" : {
-        "tooltip" : "Cannot see it on my Ledger",
-        "title" : "Why can I not see Restore with Protect on my Ledger?",
-        "desc1" : "The most probable option is that your device is not compatible with Protect. No worries, we are here to guide you on how to make it work.",
-        "desc2" : "Please contact us through and choose \"My Ledger doesn't display Restore with Protect\", we got you covered.",
-        "cta" : "Go through manual steps",
+        "tooltip" : "لا أستطيع رؤيته على Ledger الخاص بي",
+        "title" : "لماذا لا أستطيع رؤية Restore with Protect [الاستعادة عن طريق Protect] على Ledger الخاص بي؟",
+        "desc1" : "السبب الأكثر احتمالاً هو أن جهازك غير متوافق مع Protect. لا تقلق، نحن هنا لإرشادك حول كيفية جعلها تعمل.",
+        "desc2" : "يُرجى التواصل معنا واختيار \"My Ledger doesn't display Restore with Protect [Ledger الخاص بي لا يعرض الاستعادة عن طريق Protect]\"، ونحن هنا من أجلك.",
+        "cta" : "اتبع الخطوات اليدوية",
         "supportLink" : "تواصل مع دعم Ledger"
       }
     },
@@ -1774,12 +1774,12 @@
       },
       "error" : {
         "generic" : {
-          "title" : "Pairing unsuccessful",
-          "subtitle" : "Looks like something went wrong!\nCheck that your Bluetooth is switched on and your {{productName}} is nearby."
+          "title" : "الإقران لم ينجح",
+          "subtitle" : "يبدو أنه قد حدث خطأ ما!\nتأكد من تشغيل البلوتوث لديك وأن {{productName}} خاصتك قريب."
         },
         "lockedDevice" : {
-          "title" : "Your device is locked",
-          "subtitle" : "Unlock your {{ productName }} and try again."
+          "title" : "جهازك مقفل",
+          "subtitle" : "قم بإلغاء قفل {{ productName }} خاصتك وحاول مرة أخرى."
         },
         "retryCta" : "أعد المحاولة"
       }
@@ -2637,7 +2637,7 @@
       "featureFlagsDesc" : "القيم المُتجاوزَة سيتم إعادة تعيينها إذا أُعيد إطلاق التطبيق. سيتم قبول خيوط JSON الصالحة فقط.",
       "featureFlagsEdit" : "تعديل",
       "featureFlagsRestore" : "استعادة",
-      "firebaseProject" : "Firebase project targeted by this build:"
+      "firebaseProject" : "مشروع Firebase الذي يستهدفه هذا الإصدار:"
     }
   },
   "notifications" : {
@@ -5749,19 +5749,19 @@
           }
         },
         "confirmIdentity" : {
-          "title" : "Action required",
-          "desc" : "Confirm your identity and complete all tasks to protect your recovery phrase.",
+          "title" : "مطلوب إجراء",
+          "desc" : "قم بتأكيد هويتك وإتمام كل المهام لحماية عبارة الاسترداد الخاصة بك.",
           "actions" : {
-            "confirmNow" : "Confirm now",
-            "viewDetails" : "View details"
+            "confirmNow" : "التأكيد الآن",
+            "viewDetails" : "رؤية التفاصيل"
           }
         },
         "addPayment" : {
-          "title" : "Action required",
-          "desc" : "Add a payment details and complete all tasks to protect your recovery phrase.",
+          "title" : "مطلوب إجراء",
+          "desc" : "قم بإضافة تفاصيل الدفع وإتمام كل المهام لحماية عبارة الاسترداد الخاصة بك.",
           "actions" : {
-            "addNow" : "Add now",
-            "viewDetails" : "View details"
+            "addNow" : "إضافة الآن",
+            "viewDetails" : "رؤية التفاصيل"
           }
         },
         "paymentRejected" : {
@@ -5792,15 +5792,15 @@
   },
   "protect" : {
     "login" : {
-      "title" : "Log In",
-      "desc" : "Log in with your Ledger account to manage your Protect subscription.",
-      "email" : "Email",
-      "password" : "Password",
-      "cta" : "Login",
-      "forgotPassword" : "Forgot password?",
+      "title" : "تسجيل الدخول",
+      "desc" : "قم بتسجيل الدخول عن طريق حسابك Ledger لإدارة اشتراك Protect الخاص بك.",
+      "email" : "البريد الإلكتروني",
+      "password" : "كلمة المرور",
+      "cta" : "تسجيل الدخول",
+      "forgotPassword" : "نسيت كلمة المرور؟",
       "errors" : {
-        "emptyEmail" : "Email cannot be empty",
-        "emptyPassword" : "Password cannot be empty"
+        "emptyEmail" : "لا يمكن أن يكون البريد الإلكتروني فارغاً",
+        "emptyPassword" : "لا يمكن أن تكون كلمة المرور فارغة"
       }
     }
   }
