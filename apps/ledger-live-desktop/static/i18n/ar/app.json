@@ -2185,7 +2185,7 @@
     "version" : "Ledger Live {{versionNb}}"
   },
   "troubleshootNetwork" : {
-    "title" : "Troubleshoot networking"
+    "title" : "استكشاف أخطاء الشبكة وإصلاحها"
   },
   "systemLanguageAvailable" : {
     "title" : "تريد تغير لغة تطبيقك؟",
@@ -3554,7 +3554,7 @@
       "featureFlagsEdit" : "تعديل",
       "featureFlagsRestore" : "استعادة",
       "featureFlagsOverride" : "تجاوز",
-      "firebaseProject" : "Firebase project targeted by this build:",
+      "firebaseProject" : "مشروع Firebase الذي يستهدفه هذا الإصدار:",
       "addLocalApp" : "إضافة تطبيق محلي",
       "addLocalAppDesc" : "تصفح الملفات المحلية وقم بإضافة تطبيق محلي باستخدام بيان محلي",
       "addLocalAppButton" : "تصفح",
@@ -3703,9 +3703,9 @@
       "btn" : "حفظ"
     },
     "troubleshootNetwork" : {
-      "title" : "Troubleshoot networking",
-      "desc" : "Run a checklist to assess networking conditions for troubleshooting purposes.",
-      "btn" : "Troubleshoot"
+      "title" : "استكشاف أخطاء الشبكة وإصلاحها",
+      "desc" : "شغّل قائمة فحص لتقييم عمليات الشبكة لأغراض استكشاف الأخطاء وإصلاحها.",
+      "btn" : "استكشاف الأخطاء وإصلاحها"
     },
     "accounts" : {
       "hideEmptyTokens" : {
@@ -4863,7 +4863,7 @@
     },
     "OperatingSystemOutdated" : {
       "title" : "إصدار نظام التشغيل لديك قديم",
-      "description" : "يُرجى ترقية نظام التشغيل لديك والمحاولة مجدداً. يمكنك الرجوع إلى المقالة أدناه لفهم لماذا Ledger Live غير مدعوم على إصدار نظام التشغيل المثبّت لديك حالياً."
+      "description" : "يُرجى ترقية نظام التشغيل لديك والمحاولة مجدداً. يمكنك الرجوع إلى المقالة أدناه لفهم لماذا Ledger Live غير مدعوم على إصدار نظام التشغيل الحالي لديك."
     },
     "PasswordsDontMatch" : {
       "title" : "كلمات المرور غير متطابقتين",
