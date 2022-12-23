@@ -789,19 +789,19 @@
     "titlePermissionRequired" : "إذن الموقع مطلوب",
     "titlePermissionRequiredPrecise" : "إذن الموقع الدقيق مطلوب",
     "descriptionServiceRequired" : "Ledger Live يتطلب خدمات الموقع لإقران جهازك عبر خاصية البلوتوث.",
-    "descriptionPermissionRequired" : "Ledger Live يحتاج إلى إذن الموقع لإقران جهازك عبر البلوتوث.",
-    "descriptionPermissionRequiredPrecise" : "Ledger Live يحتاج إلى إذن الموقع الدقيق لإقران جهازك عبر البلوتوث.",
+    "descriptionPermissionRequired" : "Ledger Live يتطلب إذن الموقع لإقران جهازك عبر البلوتوث.",
+    "descriptionPermissionRequiredPrecise" : "Ledger Live يتطلب إذن الموقع الدقيق لإقران جهازك عبر البلوتوث.",
     "open" : "فتح إعدادات الموقع",
     "noInfos" : "Ledger لا تقوم بالوصول إلى معلومات موقعك."
   },
   "permissions" : {
     "open" : "فتح تصريحات التطبيق",
-    "authorize" : "التصريح",
+    "authorize" : "تصريح",
     "bluetooth" : {
-      "modalTitle" : "الإذن مطلوب لإقران Ledger خاصتك عبر البلوتوث",
-      "modalDescriptionBase" : "لإقران Ledger خاصتك عبر البلوتوث، ينبغي أن تسمح لـ Ledger Live بمسح الأجهزة القريبة.",
-      "modalDescriptionSettingsVariant" : "لإقران Ledger خاصتك عبر البلوتوث، ينبغي أن تسمح لـ Ledger Live بمسح الأجهزة القريبة من إعدادات هاتفك.",
-      "modalButtonLabelBase" : "التصريح",
+      "modalTitle" : "الإذن مطلوب لإقران Ledger الخاص بك عبر البلوتوث",
+      "modalDescriptionBase" : "لإقران Ledger الخاص بك عبر البلوتوث، يجب عليك أن تُصرِح لـ Ledger Live بمسح الأجهزة القريبة.",
+      "modalDescriptionSettingsVariant" : "لإقران Ledger الخاص بك عبر البلوتوث، يجب عليك أن تُصرِح لـ Ledger Live بمسح الأجهزة القريبة في إعدادات هاتفك.",
+      "modalButtonLabelBase" : "تصريح",
       "modalButtonLabelSettingsVariant" : "انتقل إلى الإعدادات",
       "dontPair" : "لا تُقرِن"
     }
@@ -1718,12 +1718,12 @@
       },
       "error" : {
         "generic" : {
-          "title" : "Pairing unsuccessful",
-          "subtitle" : "Looks like something went wrong!\nCheck that your Bluetooth is switched on and your {{productName}} is nearby."
+          "title" : "الإقران لم ينجح",
+          "subtitle" : "يبدو أنه قد حدث خطأ ما!\nتأكد من تشغيل البلوتوث لديك وأن {{productName}} خاصتك قريب."
         },
         "lockedDevice" : {
-          "title" : "Your device is locked",
-          "subtitle" : "Unlock your {{ productName }} and try again."
+          "title" : "جهازك مقفل",
+          "subtitle" : "قم بإلغاء قفل {{ productName }} خاصتك وحاول مرة أخرى."
         },
         "retryCta" : "أعد المحاولة"
       }
@@ -2577,7 +2577,7 @@
       "featureFlagsDesc" : "القيم المُتجاوزَة سيتم إعادة تعيينها إذا أُعيد إطلاق التطبيق. سيتم قبول خيوط JSON الصالحة فقط.",
       "featureFlagsEdit" : "تعديل",
       "featureFlagsRestore" : "استعادة",
-      "firebaseProject" : "Firebase project targeted by this build:"
+      "firebaseProject" : "مشروع Firebase الذي يستهدفه هذا الإصدار:"
     }
   },
   "notifications" : {
