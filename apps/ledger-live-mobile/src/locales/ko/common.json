@@ -716,6 +716,9 @@
     "StellarSourceHasMultiSign" : {
       "title" : "스텔라 트랜잭션을 수행하려면 다중서명을 비활성화하세요"
     },
+    "StellarBurnAddressError" : {
+      "title" : "스텔라 계정을 추가 중 문제가 발생했습니다"
+    },
     "ImageLoadFromGalleryError" : {
       "title" : "갤러리 이미지 로딩 실패",
       "description" : "다른 이미지로 다시 시도하세요"
@@ -785,25 +788,25 @@
     }
   },
   "location" : {
-    "titleServiceRequired" : "Location services required",
-    "titlePermissionRequired" : "Location permission required",
-    "titlePermissionRequiredPrecise" : "Precise location permission required",
-    "descriptionServiceRequired" : "Ledger Live requires location services to pair your device through Bluetooth.",
-    "descriptionPermissionRequired" : "Ledger Live requires the location permission to pair your device through Bluetooth.",
-    "descriptionPermissionRequiredPrecise" : "Ledger Live requires the precise location permission to pair your device through Bluetooth.",
+    "titleServiceRequired" : "위치 서비스가 필요합니다",
+    "titlePermissionRequired" : "위치 정보 액세스 권한이 필요합니다",
+    "titlePermissionRequiredPrecise" : "정확한 위치 정보 액세스 권한이 필요합니다",
+    "descriptionServiceRequired" : "블루투스로 귀하의 장치를 Ledger Live와 페어링 하려면 위치 서비스가 필요합니다.",
+    "descriptionPermissionRequired" : "블루투스로 귀하의 장치를 Ledger Live와 페어링 하려면 위치 정보 액세스 권한이 필요합니다.",
+    "descriptionPermissionRequiredPrecise" : "블루투스로 귀하의 장치를 Ledger Live와 페어링 하려면 정확한 위치 정보 액세스 권한이 필요합니다.",
     "open" : "위치 설정 열기",
     "noInfos" : "Ledger는 사용자의 위치 정보를 사용하지 않습니다."
   },
   "permissions" : {
     "open" : "앱 사용 권한 열기",
-    "authorize" : "Authorize",
+    "authorize" : "승인",
     "bluetooth" : {
-      "modalTitle" : "Permission required to pair your Ledger over Bluetooth",
-      "modalDescriptionBase" : "To pair your Ledger over Bluetooth, you must authorize Ledger Live to scan for nearby devices.",
-      "modalDescriptionSettingsVariant" : "To pair your Ledger over Bluetooth, you must authorize Ledger Live to scan for nearby devices in your phone’s settings.",
-      "modalButtonLabelBase" : "Authorize",
-      "modalButtonLabelSettingsVariant" : "Go to settings",
-      "dontPair" : "Don't pair"
+      "modalTitle" : "Ledger를 블루투스로 페어링하려면 승인이 필요합니다",
+      "modalDescriptionBase" : "Ledger를 블루투스로 페어링하려면 Ledger Live가 주변 장치를 스캔할 수 있도록 승인해야 합니다",
+      "modalDescriptionSettingsVariant" : "Ledger를 블루투스로 페어링하려면 휴대폰 설정에서 Ledger Live가 주변 장치를 스캔할 수 있도록 승인해야 합니다",
+      "modalButtonLabelBase" : "승인",
+      "modalButtonLabelSettingsVariant" : "설정으로 이동",
+      "dontPair" : "페어링 금지"
     }
   },
   "fees" : {
@@ -1208,7 +1211,11 @@
         "subTitle" : "새 장치에서 복구 문구를 복원하세요",
         "desc" : "기존 복구 문구를 사용하여 새 Nano에서 개인 키를 복구하세요!"
       },
-      "recovery" : "이미 복구 문구가 있나요?"
+      "recovery" : "이미 복구 문구가 있나요?",
+      "protect" : {
+        "label" : "~60분",
+        "subTitle" : "Protect를 통해 복구하세요"
+      }
     },
     "stepNewDevice" : {
       "0" : {
@@ -1429,6 +1436,31 @@
           "desc" : "3가지 간단한 질문에 답하며 사람들이 흔히 잘못 알고 있는 하드웨어 지갑 상식을 알아보세요.",
           "cta" : "퀴즈를 풀어보세요"
         }
+      }
+    },
+    "stepProtect" : {
+      "bullets" : {
+        "0" : {
+          "title" : "둘러보기 ",
+          "label" : "스크린 상의 지시를 읽어보며 다양한 장치 활용 방법을 알아보세요."
+        },
+        "1" : {
+          "title" : "\"복구\"를 선택하세요",
+          "label" : "두 버튼을 동시에 눌러 선택한 항목을 승인해주세요."
+        },
+        "2" : {
+          "title" : "\"Protect로 복구\" 모드를 선택합니다",
+          "label" : "두 버튼을 동시에 눌러 선택한 항목을 승인해주세요."
+        }
+      },
+      "nextStep" : "계속",
+      "extraInfo" : {
+        "tooltip" : "내 Ledger에 표시되지 않음",
+        "title" : "내 Ledger에 Protect를 통한 복구가 표시되지 않는 이유는 무엇인가요?",
+        "desc1" : "장치가 Protect와 호환되지 않기 때문일 가능성이 가장 높습니다. 걱정하지 마세요. 해결 방법을 안내해 드리겠습니다.",
+        "desc2" : "당사로 연락하여 \"내 Ledger에 Protect를 통한 복구가 표시되지 않음\"을 선택하시면 지원해 드리겠습니다.",
+        "cta" : "수동으로 진행",
+        "supportLink" : "Ledger 지원 부서에 문의해주세요"
       }
     },
     "stepRecoveryPhrase" : {
@@ -1717,8 +1749,14 @@
         "subtitle" : "{{productName}}에서 코드를 확인합니다"
       },
       "error" : {
-        "title" : "페어링 실패",
-        "subtitle" : "문제가 발생한 것 같습니다!\n블루투스가 켜져 있고 {{productName}} 장치가 근처에 있는지 확인하세요.",
+        "generic" : {
+          "title" : "페어링 실패",
+          "subtitle" : "문제가 발생한 것 같습니다!\n블루투스가 켜져 있고 {{productName}} 장치가 근처에 있는지 확인하세요."
+        },
+        "lockedDevice" : {
+          "title" : "장치가 잠금 상태입니다",
+          "subtitle" : "{{ productName }}의 잠금을 해제하고 다시 시도하세요."
+        },
         "retryCta" : "다시 시도하세요"
       }
     }
@@ -3269,7 +3307,7 @@
       "maxFee" : "최대 비용",
       "maxPriorityFee" : "최대 우선 수수료",
       "nextBlock" : "다음 블록",
-      "suggested" : "권장",
+      "suggested" : "추천",
       "maxFees" : "최대 수수료",
       "validateGasLimit" : "가스 제한 검증",
       "fees" : "수수료",
@@ -5541,6 +5579,88 @@
       },
       "media" : {
         "tag" : "{{count}}개의 NFT"
+      }
+    }
+  },
+  "servicesWidget" : {
+    "title" : "서비스",
+    "subTitle" : "Ledger 서비스 관리",
+    "protect" : {
+      "title" : "Protect",
+      "status" : {
+        "new" : {
+          "title" : "신규",
+          "desc" : "복구 문구 백업",
+          "0" : {
+            "title" : "수백만 명의 Ledger 사용자가 신뢰하는"
+          },
+          "1" : {
+            "title" : "귀하의 복구 문구는 귀하의 신원과 안전하게 연결됩니다"
+          },
+          "2" : {
+            "title" : "최첨단 암호화"
+          },
+          "3" : {
+            "title" : "3개의 탈중앙화된 부분으로 분할되어 복구 문구를 절대 도난당하지 않습니다"
+          },
+          "actions" : {
+            "learnMore" : "자세히 알아보기",
+            "alreadySubscribed" : "이미 Protect에 가입하셨나요?"
+          }
+        },
+        "confirmIdentity" : {
+          "title" : "필요한 조치",
+          "desc" : "본인의 신원을 확인하고 모든 작업을 완료하여 복구 문구를 보호하세요.",
+          "actions" : {
+            "confirmNow" : "지금 확인하기",
+            "viewDetails" : "세부사항 보기"
+          }
+        },
+        "addPayment" : {
+          "title" : "필요한 조치",
+          "desc" : "결제 세부 정보를 추가하고 모든 작업을 완료하여 복구 문구를 보호하세요.",
+          "actions" : {
+            "addNow" : "지금 추가",
+            "viewDetails" : "세부사항 보기"
+          }
+        },
+        "paymentRejected" : {
+          "title" : "결제 거부됨",
+          "desc" : "$5 결제에 실패했습니다. 결제 세부정보를 수정해주세요.",
+          "actions" : {
+            "editNow" : "지금 수정",
+            "viewDetails" : "세부사항 보기"
+          }
+        },
+        "subscriptionCanceled" : {
+          "title" : "취소된 구독",
+          "desc" : "3개월 무료 평가판 이후 구독이 종료되었습니다.",
+          "actions" : {
+            "contactLedgerSupport" : "Ledger 지원 부서에 문의해주세요",
+            "viewDetails" : "세부사항 보기"
+          }
+        },
+        "active" : {
+          "title" : "활성",
+          "desc" : "귀하의 복구 문구가 보호됩니다",
+          "actions" : {
+            "viewDetails" : "세부사항 보기"
+          }
+        }
+      }
+    }
+  },
+  "protect" : {
+    "login" : {
+      "title" : "로그인",
+      "desc" : "Ledger 계정으로 로그인하여 Protect 구독을 관리하세요.",
+      "email" : "이메일",
+      "password" : "패스워드",
+      "cta" : "로그인",
+      "forgotPassword" : "패스워드를 잊으셨나요?",
+      "errors" : {
+        "emptyEmail" : "이메일은 비워둘 수 없습니다",
+        "emptyPassword" : "패스워드는 비워둘 수 없습니다"
       }
     }
   }
