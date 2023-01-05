@@ -1,18 +1,22 @@
 import type { DeviceAction } from "../../bot/types";
 import type { Transaction } from "./types";
-import { deviceActionFlow, formatDeviceAmount } from "../../bot/specs";
+import {
+  deviceActionFlow,
+  formatDeviceAmount,
+  SpeculosButton,
+} from "../../bot/specs";
 
 export const acceptTransaction: DeviceAction<Transaction, any> =
   deviceActionFlow({
     steps: [
       {
         title: "Receiver",
-        button: "Rr",
+        button: SpeculosButton.RIGHT,
         expectedValue: ({ transaction }) => transaction.recipient,
       },
       {
         title: "Amount",
-        button: "Rr",
+        button: SpeculosButton.RIGHT,
         expectedValue: ({ account, status }) => {
           return formatDeviceAmount(account.currency, status.amount, {
             postfixCode: true,
@@ -21,20 +25,20 @@ export const acceptTransaction: DeviceAction<Transaction, any> =
       },
       {
         title: "Fee",
-        button: "Rr",
+        button: SpeculosButton.RIGHT,
         // TODO: add a expectedValue fn
       },
       {
         title: "Data",
-        button: "Rr",
+        button: SpeculosButton.RIGHT,
       },
       {
         title: "Sign",
-        button: "LRlr",
+        button: SpeculosButton.BOTH,
       },
       {
         title: "Network",
-        button: "Rr",
+        button: SpeculosButton.RIGHT,
         expectedValue: () => "Mainnet",
       },
     ],
