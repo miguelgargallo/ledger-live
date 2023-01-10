@@ -144,6 +144,7 @@ class BitcoinLikeWallet {
         }
       }
     });
+
     // fees if we use all utxo
     const fees =
       feePerByte *
