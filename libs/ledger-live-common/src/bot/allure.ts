@@ -33,10 +33,10 @@ export function createAllureReport({
       step.endStep();
       step.status = error ? Status.FAILED : Status.PASSED;
     });
-    allureTest.endTest();
     // We set the status to error if any error happened
     const anyError = r.fatalError || r.mutations?.find((r) => r.error);
     allureTest.status = anyError ? Status.FAILED : Status.PASSED;
+    allureTest.endTest();
   });
   group.endGroup();
 }
