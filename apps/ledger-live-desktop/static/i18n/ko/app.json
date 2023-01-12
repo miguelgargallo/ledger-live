@@ -131,7 +131,7 @@
     "nanoS" : "Nano S",
     "nanoSP" : "Nano S Plus",
     "nanoX" : "Nano X",
-    "nanoFTS" : "Nano FTS",
+    "stax" : "Stax",
     "blue" : "Blue"
   },
   "operation" : {
@@ -1206,8 +1206,11 @@
         "checkDeviceButton" : "확인 절차를 다시 실행하세요",
         "cancelButton" : "다음에 결정하기"
       },
-      "genuineCheckAnimationModal" : {
-        "message" : "{{deviceName}}에서 관리자 허용"
+      "softwareCheckAllowSecureChannelModal" : {
+        "title" : "{{deviceName}}에서 관리자 허용"
+      },
+      "softwareCheckLockedDeviceModal" : {
+        "title" : "장치를 잠금 해제하세요"
       },
       "helpDrawer" : {
         "title" : "설정 안내와 관련하 도움이 필요하신가요?",
@@ -5559,8 +5562,7 @@
     "postOnboarding" : {
       "title" : "내 장치 커스텀",
       "description" : "화면 커스텀을 통해",
-      "actionCompletedPopupLabel" : "장치 커스텀 완료",
-      "actionCompletedHubTitle" : "더욱 깔끔한 화면을 즐길 수 있습니다."
+      "actionCompletedPopupLabel" : "장치 커스텀 완료"
     },
     "customImageSet" : "맞춤 이미지 세트",
     "finishCTA" : "완료"
