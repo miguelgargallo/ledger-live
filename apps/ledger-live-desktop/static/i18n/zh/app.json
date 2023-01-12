@@ -131,7 +131,7 @@
     "nanoS" : "Nano S",
     "nanoSP" : "Nano S Plus",
     "nanoX" : "Nano X",
-    "nanoFTS" : "Nano FTS",
+    "stax" : "Stax",
     "blue" : "Blue"
   },
   "operation" : {
@@ -1206,8 +1206,11 @@
         "checkDeviceButton" : "再次运行检查",
         "cancelButton" : "以后再说"
       },
-      "genuineCheckAnimationModal" : {
-        "message" : "在 {{deviceName}} 上允许使用管理器"
+      "softwareCheckAllowSecureChannelModal" : {
+        "title" : "在 {{deviceName}} 上允许使用管理器"
+      },
+      "softwareCheckLockedDeviceModal" : {
+        "title" : "解锁您的设备"
       },
       "helpDrawer" : {
         "title" : "需要安装手册方面的一些帮助？",
@@ -5559,8 +5562,7 @@
     "postOnboarding" : {
       "title" : "个性化我的设备",
       "description" : "通过自定义屏幕",
-      "actionCompletedPopupLabel" : "设备已个性化",
-      "actionCompletedHubTitle" : "那个屏幕看起来很简洁。"
+      "actionCompletedPopupLabel" : "设备已个性化"
     },
     "customImageSet" : "自定义图片集",
     "finishCTA" : "完成"
