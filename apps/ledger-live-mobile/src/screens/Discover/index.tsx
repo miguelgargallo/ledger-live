@@ -1,3 +1,5 @@
+// TODO : Working on
+
 import React, { memo, useCallback, useMemo, useContext } from "react";
 import { Linking, Platform, ScrollView } from "react-native";
 import styled from "styled-components/native";
@@ -72,27 +74,40 @@ function Discover() {
   }[] = useMemo(
     () =>
       [
-        ...(Platform.OS !== "ios"
-          ? [
-              {
-                title: t("discover.sections.ledgerApps.title"),
-                subTitle: t("discover.sections.ledgerApps.desc"),
-                onPress: () => {
-                  navigation.navigate(NavigatorName.Discover, {
-                    screen: ScreenName.PlatformCatalog,
-                  });
-                },
-                disabled: false,
-                Image: (
-                  <Illustration
-                    size={110}
-                    darkSource={images.dark.appsImg}
-                    lightSource={images.light.appsImg}
-                  />
-                ),
-              },
-            ]
-          : []),
+        {
+          title: t("discover.sections.browseWeb3.title"),
+          subTitle: t("discover.sections.browseWeb3.desc"),
+          onPress: () => {
+            navigation.navigate(NavigatorName.Discover, {
+              screen: ScreenName.PlatformCatalog,
+            });
+          },
+          disabled: false,
+          Image: (
+            <Illustration
+              size={110}
+              darkSource={images.dark.appsImg}
+              lightSource={images.light.appsImg}
+            />
+          ),
+        },
+        {
+          title: t("discover.sections.ledgerApps.title"),
+          subTitle: t("discover.sections.ledgerApps.desc"),
+          onPress: () => {
+            navigation.navigate(NavigatorName.Discover, {
+              screen: ScreenName.PlatformCatalog,
+            });
+          },
+          disabled: false,
+          Image: (
+            <Illustration
+              size={110}
+              darkSource={images.dark.appsImg}
+              lightSource={images.light.appsImg}
+            />
+          ),
+        },
         {
           title: t("discover.sections.learn.title"),
           subTitle: t("discover.sections.learn.desc"),
