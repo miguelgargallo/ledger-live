@@ -9,11 +9,11 @@ import type {
   AppManifest,
 } from "@ledgerhq/live-common/platform/types";
 import { translateContent } from "@ledgerhq/live-common/platform/logic";
-import { useLocale } from "../../context/Locale";
-import LText from "../../components/LText";
-import IconChevron from "../../icons/ArrowRight";
-import AppIcon from "./AppIcon";
-import { Theme } from "../../colors";
+import { useLocale } from "../../../context/Locale";
+import LText from "../../../components/LText";
+import IconChevron from "../../../icons/ArrowRight";
+import AppIcon from "../AppIcon";
+import { Theme } from "../../../colors";
 
 function getBranchStyle(branch: AppBranch, colors: Theme["colors"]) {
   switch (branch) {

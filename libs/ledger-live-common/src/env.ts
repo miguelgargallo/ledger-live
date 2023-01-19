@@ -706,6 +706,11 @@ const envDefinitions = {
     parser: intParser,
     desc: "version used for the platform api",
   },
+  PLATFORM_DISCOVERY_VERSION: {
+    def: 1,
+    parser: intParser,
+    desc: "version used for the descovery screen",
+  },
   PLAYWRIGHT_RUN: {
     def: false,
     parser: boolParser,

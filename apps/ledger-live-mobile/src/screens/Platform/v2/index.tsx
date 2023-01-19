@@ -1,26 +1,30 @@
 // TODO : Working on
 
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import type { AppManifest } from "@ledgerhq/live-common/platform/types";
 import { useSelector } from "react-redux";
-import { useBanner } from "../../components/banners/hooks";
-import TrackScreen from "../../analytics/TrackScreen";
-import { ScreenName } from "../../const";
+import { useBanner } from "../../../components/banners/hooks";
+import TrackScreen from "../../../analytics/TrackScreen";
+import { ScreenName } from "../../../const";
 // import type { Props as DisclaimerProps } from "./DAppDisclaimer";
 import AppCard from "./AppCard";
-import { TAB_BAR_SAFE_HEIGHT } from "../../components/TabBar/shared";
-import TabBarSafeAreaView from "../../components/TabBar/TabBarSafeAreaView";
-import { readOnlyModeEnabledSelector } from "../../reducers/settings";
-import { useFilteredManifests } from "./shared";
+import { TAB_BAR_SAFE_HEIGHT } from "../../../components/TabBar/shared";
+import TabBarSafeAreaView from "../../../components/TabBar/TabBarSafeAreaView";
+import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
+import {
+  useFilteredManifests,
+  useCategories,
+  useManifestsByCategory,
+} from "./shared";
 import {
   BaseComposite,
   StackNavigatorProps,
-} from "../../components/RootNavigator/types/helpers";
-import { DiscoverNavigatorStackParamList } from "../../components/RootNavigator/types/DiscoverNavigator";
-import AnimatedHeaderViewV2 from "../../components/AnimatedHeaderV2";
+} from "../../../components/RootNavigator/types/helpers";
+import { DiscoverNavigatorStackParamList } from "../../../components/RootNavigator/types/DiscoverNavigator";
+import AnimatedHeaderViewV2 from "../../../components/AnimatedHeaderV2";
 
 type NavigationProps = BaseComposite<
   StackNavigatorProps<
@@ -37,28 +41,17 @@ type DisclaimerOpts =
   */
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
-const PlatformCatalogV2 = ({ route }: NavigationProps) => {
+export default function PlatformCatalogV2({ route }: NavigationProps) {
   const { platform, ...routeParams } = route.params ?? {};
-  const [category, setCategory] = useState("all");
+
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProps["navigation"]>();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
-  const filteredManifests = useFilteredManifests();
-  let listOfCategories: string[] = ["all"];
 
-  filteredManifests.forEach(manifest => {
-    listOfCategories = Array.from(
-      new Set(listOfCategories.concat(manifest.categories)),
-    );
-  }, []);
-
-  const filteredManifestsByCategories = useCallback(() => {
-    if (category !== "all") {
-      return filteredManifests.filter(manifest =>
-        manifest.categories.includes(category),
-      );
-    }
-    return filteredManifests;
-  }, [category])();
+  const manifests = useFilteredManifests();
+  const categories = useCategories(manifests);
+  const { res: manifestsByCategory, setCategory } =
+    useManifestsByCategory(manifests);
 
   // Disclaimer State
   // const [disclaimerOpts, setDisclaimerOpts] = useState<DisclaimerOpts>(null);
@@ -104,8 +97,8 @@ const PlatformCatalogV2 = ({ route }: NavigationProps) => {
   );
   useEffect(() => {
     // platform can be predefined when coming from a deeplink
-    if (platform && filteredManifests) {
-      const manifest = filteredManifests.find(m => m.id === platform);
+    if (platform && manifests) {
+      const manifest = manifests.find(m => m.id === platform);
 
       if (manifest) {
         navigation.navigate(ScreenName.PlatformApp, {
@@ -115,21 +108,22 @@ const PlatformCatalogV2 = ({ route }: NavigationProps) => {
         });
       }
     }
-  }, [platform, filteredManifests, navigation, routeParams]);
+  }, [platform, manifests, navigation, routeParams]);
+
   return (
     <TabBarSafeAreaView edges={["bottom", "left", "right"]}>
       <AnimatedHeaderViewV2
         titleStyle={styles.title}
-        title={<Trans i18nKey={"browseWeb3.catalog.title"} />}
-        subtitle={<Trans i18nKey={"browseWeb3.catalog.subtitle"} />}
+        title={t("browseWeb3.catalog.title")}
+        subtitle={t("browseWeb3.catalog.subtitle")}
         hasBackButton
-        list={listOfCategories}
+        list={categories}
         listTitle={"Categories"}
         listElementAction={setCategory}
       >
         <TrackScreen category="Platform" name="Catalog" />
 
-        {filteredManifestsByCategories.map(manifest => (
+        {manifestsByCategory.map(manifest => (
           <AppCard
             key={`${manifest.id}.${manifest.branch}`}
             manifest={manifest}
@@ -140,7 +134,7 @@ const PlatformCatalogV2 = ({ route }: NavigationProps) => {
       </AnimatedHeaderViewV2>
     </TabBarSafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   title: {
@@ -151,5 +145,3 @@ const styles = StyleSheet.create({
     paddingBottom: TAB_BAR_SAFE_HEIGHT,
   },
 });
-
-export default PlatformCatalogV2;

@@ -2613,6 +2613,10 @@
         "experimentalSwap": {
           "title": "New SWAP interface",
           "description": "Use the new experimental swap interface"
+        },
+        "experimentalPlatformDiscovery": {
+          "title": "Discovery v2",
+          "description": "Use the new experimental discovery screen"
         }
       },
       "developerFeatures": {

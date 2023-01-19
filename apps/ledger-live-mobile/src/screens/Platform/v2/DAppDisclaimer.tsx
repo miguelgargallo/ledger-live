@@ -10,9 +10,9 @@ import {
   Icons,
   Button,
 } from "@ledgerhq/native-ui";
-import BottomModal from "../../components/BottomModal";
+import BottomModal from "../../../components/BottomModal";
 import AppIcon from "./AppIcon";
-import LedgerIcon from "../../icons/Ledger";
+import LedgerIcon from "../../../icons/Ledger";
 
 export type Props = {
   closeDisclaimer: () => void;
