@@ -786,24 +786,24 @@
   },
   "location" : {
     "titleServiceRequired" : "خدمات الموقع مطلوبة",
-    "titlePermissionRequired" : "Location permission required",
-    "titlePermissionRequiredPrecise" : "Precise location permission required",
+    "titlePermissionRequired" : "إذن الموقع مطلوب",
+    "titlePermissionRequiredPrecise" : "إذن الموقع الدقيق مطلوب",
     "descriptionServiceRequired" : "Ledger Live يتطلب خدمات الموقع لإقران جهازك عبر خاصية البلوتوث.",
-    "descriptionPermissionRequired" : "Ledger Live requires the location permission to pair your device through Bluetooth.",
-    "descriptionPermissionRequiredPrecise" : "Ledger Live requires the precise location permission to pair your device through Bluetooth.",
+    "descriptionPermissionRequired" : "Ledger Live يتطلب إذن الموقع لإقران جهازك عبر البلوتوث.",
+    "descriptionPermissionRequiredPrecise" : "Ledger Live يتطلب إذن الموقع الدقيق لإقران جهازك عبر البلوتوث.",
     "open" : "فتح إعدادات الموقع",
     "noInfos" : "Ledger لا تقوم بالوصول إلى معلومات موقعك."
   },
   "permissions" : {
     "open" : "فتح تصريحات التطبيق",
-    "authorize" : "Authorize",
+    "authorize" : "تصريح",
     "bluetooth" : {
-      "modalTitle" : "Permission required to pair your Ledger over Bluetooth",
-      "modalDescriptionBase" : "To pair your Ledger over Bluetooth, you must authorize Ledger Live to scan for nearby devices.",
-      "modalDescriptionSettingsVariant" : "To pair your Ledger over Bluetooth, you must authorize Ledger Live to scan for nearby devices in your phone’s settings.",
-      "modalButtonLabelBase" : "Authorize",
+      "modalTitle" : "الإذن مطلوب لإقران Ledger الخاص بك عبر البلوتوث",
+      "modalDescriptionBase" : "لإقران Ledger الخاص بك عبر البلوتوث، يجب عليك أن تُصرِح لـ Ledger Live بمسح الأجهزة القريبة.",
+      "modalDescriptionSettingsVariant" : "لإقران Ledger الخاص بك عبر البلوتوث، يجب عليك أن تُصرِح لـ Ledger Live بمسح الأجهزة القريبة في إعدادات هاتفك.",
+      "modalButtonLabelBase" : "تصريح",
       "modalButtonLabelSettingsVariant" : "انتقل إلى الإعدادات",
-      "dontPair" : "Don't pair"
+      "dontPair" : "لا تُقرِن"
     }
   },
   "fees" : {
@@ -2568,7 +2568,7 @@
       "featureFlagsDesc" : "القيم المُتجاوزَة سيتم إعادة تعيينها إذا أُعيد إطلاق التطبيق. سيتم قبول خيوط JSON الصالحة فقط.",
       "featureFlagsEdit" : "تعديل",
       "featureFlagsRestore" : "استعادة",
-      "firebaseProject" : "Firebase project targeted by this build:"
+      "firebaseProject" : "مشروع Firebase الذي يستهدفه هذا الإصدار:"
     }
   },
   "notifications" : {
