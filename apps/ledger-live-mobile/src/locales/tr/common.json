@@ -1242,13 +1242,13 @@
     },
     "stepSetupDevice" : {
       "start" : {
-        "title" : "Başlamanın en iyi yolu:",
+        "title" : "Başlamak için en iyi yol:",
         "bullets" : {
           "0" : {
             "label" : "30 dakika ayırın ve acele etmeyin."
           },
           "1" : {
-            "label" : "Yazmak için bir kalem ve kâğıt alın."
+            "label" : "Yazmak için bir kalem alın."
           },
           "2" : {
             "label" : "Yalnız kalın ve güvenli ve sessiz bir ortam seçin."
@@ -2486,7 +2486,7 @@
         "title" : "Fiyat Uyarıları",
         "desc" : "En çok tercih ettiğiniz coin'ler için fiyat uyarıları belirleyerek piyasa hareketlerini kaçırmayın"
       },
-      "disclaimer" : "Ledger'da veri gizliliği her şeyden önce gelir. Toplanan veriler iş ortaklarımızla asla paylaşılmaz."
+      "disclaimer" : "Ledger'da veri gizliliği her şeyden önce gelir. Toplanan veriler sağlayıcılarımızla asla paylaşılmaz."
     },
     "help" : {
       "title" : "Yardım",
@@ -2506,7 +2506,7 @@
       "resetThirdPartyData" : "Üçüncü taraf verilerini sıfırla",
       "resetThirdPartyDataDesc" : "Üçüncü taraf işlem sağlayıcısına erişmek için kullanılan tüm yerel üçüncü taraf verilerinizi silin.",
       "resetThirdPartyDataModal" : "Yerel üçüncü taraf verilerinizi silin",
-      "resetThirdPartyDataModalDesc" : "Yerel üçüncü taraf verilerinizi silin. İş ortaklarımız tarafından sağlanan hizmetlere erişmek için KYC'nizi yeniden göndermeniz veya tekrar oturum açmanız gerekebilir.",
+      "resetThirdPartyDataModalDesc" : "Yerel üçüncü taraf verilerinizi silin. Sağlayıcılarımız tarafından sağlanan hizmetlere erişmek için KYC'nizi yeniden göndermeniz veya tekrar oturum açmanız gerekebilir.",
       "hardReset" : "Ledger Live'ı sıfırlayın",
       "hardResetDesc" : "Bunun varlıklarınız üzerinde bir etkisi yoktur. Hesap verileri, işlem geçmişleri ve ayarlar dahil olmak üzere Ledger Live'daki tüm verileri siler. Boş bir Ledger Live'da kripto varlıklarınızı yeniden yüklemek ve yönetmek için Ledger cihazınızı kullanın.",
       "repairDevice" : "Ledger cihazınızı onarın",
