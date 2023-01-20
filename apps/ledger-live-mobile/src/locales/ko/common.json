@@ -785,25 +785,25 @@
     }
   },
   "location" : {
-    "titleServiceRequired" : "Location services required",
-    "titlePermissionRequired" : "Location permission required",
-    "titlePermissionRequiredPrecise" : "Precise location permission required",
-    "descriptionServiceRequired" : "Ledger Live requires location services to pair your device through Bluetooth.",
-    "descriptionPermissionRequired" : "Ledger Live requires the location permission to pair your device through Bluetooth.",
-    "descriptionPermissionRequiredPrecise" : "Ledger Live requires the precise location permission to pair your device through Bluetooth.",
+    "titleServiceRequired" : "위치 서비스가 필요합니다",
+    "titlePermissionRequired" : "위치 정보 액세스 권한이 필요합니다",
+    "titlePermissionRequiredPrecise" : "정확한 위치 정보 액세스 권한이 필요합니다",
+    "descriptionServiceRequired" : "블루투스로 귀하의 장치를 Ledger Live와 페어링 하려면 위치 서비스가 필요합니다.",
+    "descriptionPermissionRequired" : "블루투스로 귀하의 장치를 Ledger Live와 페어링 하려면 위치 정보 액세스 권한이 필요합니다.",
+    "descriptionPermissionRequiredPrecise" : "블루투스로 귀하의 장치를 Ledger Live와 페어링 하려면 정확한 위치 정보 액세스 권한이 필요합니다.",
     "open" : "위치 설정 열기",
     "noInfos" : "Ledger는 사용자의 위치 정보를 사용하지 않습니다."
   },
   "permissions" : {
     "open" : "앱 사용 권한 열기",
-    "authorize" : "Authorize",
+    "authorize" : "승인",
     "bluetooth" : {
-      "modalTitle" : "Permission required to pair your Ledger over Bluetooth",
-      "modalDescriptionBase" : "To pair your Ledger over Bluetooth, you must authorize Ledger Live to scan for nearby devices.",
-      "modalDescriptionSettingsVariant" : "To pair your Ledger over Bluetooth, you must authorize Ledger Live to scan for nearby devices in your phone’s settings.",
-      "modalButtonLabelBase" : "Authorize",
-      "modalButtonLabelSettingsVariant" : "Go to settings",
-      "dontPair" : "Don't pair"
+      "modalTitle" : "Ledger를 블루투스로 페어링하려면 승인이 필요합니다",
+      "modalDescriptionBase" : "Ledger를 블루투스로 페어링하려면 Ledger Live가 주변 장치를 스캔할 수 있도록 승인해야 합니다",
+      "modalDescriptionSettingsVariant" : "Ledger를 블루투스로 페어링하려면 휴대폰 설정에서 Ledger Live가 주변 장치를 스캔할 수 있도록 승인해야 합니다",
+      "modalButtonLabelBase" : "승인",
+      "modalButtonLabelSettingsVariant" : "설정으로 이동",
+      "dontPair" : "페어링 금지"
     }
   },
   "fees" : {
@@ -2568,7 +2568,7 @@
       "featureFlagsDesc" : "앱을 다시 실행하면 재정의된 값이 다시 설정됩니다. 유효한 JSON 문자열만 허용됩니다.",
       "featureFlagsEdit" : "편집",
       "featureFlagsRestore" : "복구",
-      "firebaseProject" : "Firebase project targeted by this build:"
+      "firebaseProject" : "이 빌드에서 대상으로 하는 Firebase 프로젝트:"
     }
   },
   "notifications" : {
@@ -5478,10 +5478,10 @@
     "customImage" : "커스텀 사진",
     "doThisLater" : "다음에 결정하기",
     "preview" : {
-      "title" : "Preview",
-      "loading" : "Loading preview",
-      "setPicture" : "Set custom picture",
-      "editPicture" : "Edit picture"
+      "title" : "미리보기",
+      "loading" : "미리보기 로드 중",
+      "setPicture" : "커스텀 사진 설정",
+      "editPicture" : "사진 편집"
     }
   },
   "postOnboarding" : {
