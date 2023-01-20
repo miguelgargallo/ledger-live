@@ -783,8 +783,8 @@
     "undelegating" : "Délégation interrompue",
     "availableBalanceTooltip" : "Ce montant est disponible.",
     "frozenAssetsTooltip" : "Les actifs gelés sont utilisés pour voter sur TRON. Cela représente votre nombre total de votes.",
-    "bandwidthTooltip" : "Geler des actifs pour gagner de la Bande passante",
-    "energyTooltip" : "Geler des actifs pour gagner de l’Énergie",
+    "bandwidthTooltip" : "Gelez des actifs pour gagner de la Bande passante.",
+    "energyTooltip" : "Gelez des actifs pour gagner de l’Énergie.",
     "delegatedTooltip" : "Les actifs délégués sont utilisés pour voter. Cela représente votre nombre total de votes.",
     "undelegatingTooltip" : "Les actifs dont la délégation est interrompue sont disponibles après {{timelockInDays}} jours.",
     "banner" : {
@@ -1794,7 +1794,7 @@
       },
       "updatable" : {
         "title" : "Mise à jour disponible",
-        "title_plural" : "Mises à jours disponibles",
+        "title_plural" : "Mises à jour disponibles",
         "progressTitle" : "{{number}} mise à jour d’application",
         "progressTitle_plural" : "{{number}} mises à jour d’applications",
         "progressWarning" : "Ne sortez pas de My Ledger pendant la mise à jour.",
@@ -1808,7 +1808,7 @@
         "scheduled" : "En attente",
         "update" : "Mise à jour disponible",
         "updateAll" : "Tout mettre à jour",
-        "updateAllOutOfMemory" : "Espace de stockage insuffisant. Merci de désinstaller des applications",
+        "updateAllOutOfMemory" : "Espace de stockage insuffisant. Veuillez désinstaller des applications.",
         "install" : "Installer",
         "installed" : "Installée",
         "updated" : "Mise à jour",
@@ -2105,7 +2105,7 @@
   "send" : {
     "title" : "Envoyer",
     "titleNft" : "Envoyer le NFT",
-    "totalSpent" : "Total à débiter",
+    "totalSpent" : "Total débité",
     "steps" : {
       "recipient" : {
         "title" : "Bénéficiaire",
@@ -3512,7 +3512,7 @@
       },
       "modal" : {
         "button" : "Terminé",
-        "title" : "Scanner pour exporter vers Ledger Live pour le mobile.",
+        "title" : "Scannez pour exporter vers Ledger Live mobile",
         "listTitle" : "Sur l’application Ledger Live pour le mobile :",
         "step1" : "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
         "step2" : "Appuyez sur <highlight>Importer les comptes de l’ordinateur</highlight>.",
@@ -3585,7 +3585,7 @@
       "analyticsDesc" : "Autoriser les statistiques pour aider Ledger à améliorer l’expérience utilisateur. Ces statistiques comprennent les clics, les visites de pages, les redirections, les actions (envoyer, recevoir, verrouiller, etc.), les défilements en bas de page, les installations, désinstallations et mises à jour des applications, les versions des applications, le nombre de comptes, de crypto-actifs et d’opérations, la durée des sessions, le type d’appareil Ledger et de micrologiciel.",
       "reportErrors" : "Rapports de bugs",
       "reportErrorsDesc" : "Envoyer automatiquement des rapports pour aider Ledger à améliorer ses produits.",
-      "launchOnboarding" : "Configuration de votre appareil",
+      "launchOnboarding" : "Configurer votre appareil",
       "launchOnboardingDesc" : "Configurez un nouvel appareil ou restaurez un appareil existant. Vos comptes et paramètres sont conservés."
     },
     "help" : {
@@ -5007,7 +5007,7 @@
       "title" : "Frais de priorité plus élevés que nécessaire. Vous pourriez payer trop cher."
     },
     "MaxFeeTooLow" : {
-      "title" : "Frais max. inférieurs au montant recommandé"
+      "title" : "Les frais maximaux sont inférieurs au montant recommandé"
     },
     "PriorityFeeHigherThanMaxFee" : {
       "title" : "Les frais de priorité max. doivent être inférieurs aux frais max."
