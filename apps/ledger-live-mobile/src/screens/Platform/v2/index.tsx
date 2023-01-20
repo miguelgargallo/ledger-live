@@ -6,24 +6,15 @@ import TrackScreen from "../../../analytics/TrackScreen";
 import AppCard from "./AppCard";
 import { TAB_BAR_SAFE_HEIGHT } from "../../../components/TabBar/shared";
 import TabBarSafeAreaView from "../../../components/TabBar/TabBarSafeAreaView";
-import {
-  useFilteredManifests,
-  useCategories,
-  useManifestsByCategory,
-  useDisclaimer,
-  useDeeplinkEffect,
-} from "./shared";
+import { useCategories, useDisclaimer, useDeeplinkEffect } from "./shared";
 import AnimatedHeaderViewV2 from "../../../components/AnimatedHeaderV2";
 import DAppDisclaimer from "./DAppDisclaimer";
 
 export default function PlatformCatalogV2() {
   const { t } = useTranslation();
 
-  const manifests = useFilteredManifests();
-  const categories = useCategories(manifests);
-  const { res: manifestsByCategory, setCategory } =
-    useManifestsByCategory(manifests);
-
+  const { manifests, categories, manifestsByCategory, setCategory } =
+    useCategories();
   const {
     name,
     icon,

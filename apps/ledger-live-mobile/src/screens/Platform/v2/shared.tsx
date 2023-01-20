@@ -14,9 +14,17 @@ import { ScreenName } from "../../../const";
 import { useBanner } from "../../../components/banners/hooks";
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 import { NavigationProps } from "./types";
-// import type { Props as DisclaimerProps } from "./DAppDisclaimer";
 
 const defaultArray: LiveAppManifest[] = [];
+
+export function useCategories() {
+  const manifests = useFilteredManifests();
+  const categories = useCategoriesRaw(manifests);
+  const { res: manifestsByCategory, setCategory } =
+    useManifestsByCategory(manifests);
+
+  return { manifests, categories, manifestsByCategory, setCategory };
+}
 
 export function useFilteredManifests(filterParamsOverride?: FilterParams) {
   const { state } = useRemoteLiveAppContext();
@@ -40,7 +48,7 @@ export function useFilteredManifests(filterParamsOverride?: FilterParams) {
   }, [manifests, experimental, filterParamsOverride]);
 }
 
-export function useCategories(manifests: AppManifest[]) {
+function useCategoriesRaw(manifests: AppManifest[]) {
   return useMemo(() => {
     const res = manifests.reduce((res, manifest) => {
       manifest.categories.forEach(c => {
@@ -54,7 +62,7 @@ export function useCategories(manifests: AppManifest[]) {
   }, [manifests]);
 }
 
-export function useManifestsByCategory(manifests: AppManifest[]) {
+function useManifestsByCategory(manifests: AppManifest[]) {
   const [category, setCategory] = useState("all");
 
   const res = useMemo(
