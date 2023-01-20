@@ -3551,7 +3551,7 @@
       "featureFlagsEdit" : "편집",
       "featureFlagsRestore" : "복구",
       "featureFlagsOverride" : "재정의",
-      "firebaseProject" : "Firebase project targeted by this build:",
+      "firebaseProject" : "이 빌드에서 대상으로 하는 Firebase 프로젝트:",
       "addLocalApp" : "로컬 앱 추가",
       "addLocalAppDesc" : "로컬 매니페스트 기능으로 로컬 파일을 둘러보고 로컬 앱 추가하기",
       "addLocalAppButton" : "둘러보기",
@@ -4738,8 +4738,8 @@
       "description" : "다시 연결하여 재시도해주세요."
     },
     "EConnReset" : {
-      "title" : "The Ledger application store can't be reached",
-      "description" : "Your internet connection may be down or using unusual configuration. Start by verifying if anything is blocking your connection (proxy or firewall). If the problem persists click below for solutions or reach out to our customer support."
+      "title" : "Ledger 애플리케이션 스토어에 연결할 수 없습니다.",
+      "description" : "인터넷 연결이 끊어졌거나 비정상적인 구성을 사용하고 있을 수 있습니다. 연결(프록시 또는 방화벽)을 차단하는 것이 있는지 확인하고 시작하세요. 문제가 지속되면 아래의 해결 방법을 클릭하거나 고객 지원팀에 문의해주세요."
     },
     "EnpointConfig" : {
       "title" : "잘못된 엔드포인트",
