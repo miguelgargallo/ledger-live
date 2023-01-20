@@ -1,6 +1,4 @@
-// PopUp à l'ouverture d'une app
-
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Flex,
@@ -14,54 +12,26 @@ import BottomModal from "../../../components/BottomModal";
 import AppIcon from "./AppIcon";
 import LedgerIcon from "../../../icons/Ledger";
 
-export type Props = {
-  closeDisclaimer: () => void;
-  disableDisclaimer: () => void;
-  onContinue: () => void;
-  isOpened: boolean;
-  name: string | null;
+interface Props {
+  name?: string | null;
   icon?: string | null;
-};
+  isOpened: boolean;
+  isChecked: boolean;
+  onClose: () => void;
+  onContinue: () => void;
+  toggleCheck: () => void;
+}
 
-const IconsSeparator = React.memo(() => (
-  <Flex flexDirection="row" justifyContent="center" alignItems="center" mx={2}>
-    {Array(6)
-      .fill(undefined)
-      .map((_, i) => (
-        <Flex
-          key={i}
-          width="3px"
-          height={1}
-          marginX={2}
-          backgroundColor="neutral.c40"
-        />
-      ))}
-  </Flex>
-));
-
-const DAppDisclaimer = ({
-  closeDisclaimer,
-  isOpened,
-  disableDisclaimer,
-  onContinue: next,
-  icon,
+export default function DAppDisclaimer({
   name,
-}: Props) => {
+  icon,
+  isOpened,
+  isChecked,
+  onClose,
+  onContinue,
+  toggleCheck,
+}: Props) {
   const { t } = useTranslation();
-  const [disableDisclaimerChecked, setDisableDisclaimerChecked] =
-    useState(false);
-
-  const onClose = useCallback(() => {
-    closeDisclaimer();
-  }, [closeDisclaimer]);
-
-  const onContinue = useCallback(() => {
-    if (disableDisclaimerChecked) {
-      disableDisclaimer();
-    }
-    closeDisclaimer();
-    next();
-  }, [disableDisclaimerChecked, closeDisclaimer, disableDisclaimer, next]);
 
   return (
     <BottomModal isOpened={isOpened} onClose={onClose}>
@@ -121,10 +91,8 @@ const DAppDisclaimer = ({
       >
         <Checkbox
           label={t("platform.disclaimer.checkbox")}
-          checked={disableDisclaimerChecked}
-          onChange={() =>
-            setDisableDisclaimerChecked(!disableDisclaimerChecked)
-          }
+          checked={isChecked}
+          onChange={toggleCheck}
         />
       </Flex>
 
@@ -135,6 +103,20 @@ const DAppDisclaimer = ({
       </Flex>
     </BottomModal>
   );
-};
+}
 
-export default DAppDisclaimer;
+const IconsSeparator = React.memo(() => (
+  <Flex flexDirection="row" justifyContent="center" alignItems="center" mx={2}>
+    {Array(6)
+      .fill(undefined)
+      .map((_, i) => (
+        <Flex
+          key={i}
+          width="3px"
+          height={1}
+          marginX={2}
+          backgroundColor="neutral.c40"
+        />
+      ))}
+  </Flex>
+));

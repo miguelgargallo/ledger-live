@@ -104,11 +104,9 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: "toggle",
-    name: "PLATFORM_DISCOVERY_VERSION",
-    title: i18n.t(i18nKey("experimentalPlatformDiscovery", "title")),
-    description: i18n.t(
-      i18nKey("experimentalPlatformDiscovery", "description"),
-    ),
+    name: "PLATFORM_DISCOVER_VERSION",
+    title: i18n.t(i18nKey("experimentalPlatformDiscover", "title")),
+    description: i18n.t(i18nKey("experimentalPlatformDiscover", "description")),
     valueOn: 2,
     valueOff: 1,
   },

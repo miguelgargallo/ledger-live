@@ -16,7 +16,7 @@ export default function DiscoverNavigator() {
     [colors],
   );
 
-  const version = useEnv("PLATFORM_DISCOVERY_VERSION");
+  const version = useEnv("PLATFORM_DISCOVER_VERSION");
 
   const Catalog = useMemo(
     () => (version === 2 ? PlatformCatalogV2 : PlatformCatalog),
