@@ -3551,7 +3551,7 @@
       "featureFlagsEdit" : "تعديل",
       "featureFlagsRestore" : "استعادة",
       "featureFlagsOverride" : "تجاوز",
-      "firebaseProject" : "Firebase project targeted by this build:",
+      "firebaseProject" : "مشروع Firebase الذي يستهدفه هذا الإصدار:",
       "addLocalApp" : "إضافة تطبيق محلي",
       "addLocalAppDesc" : "تصفح الملفات المحلية وقم بإضافة تطبيق محلي باستخدام بيان محلي",
       "addLocalAppButton" : "تصفح",
@@ -4738,8 +4738,8 @@
       "description" : "يرجى إعادة الاتصال والمحاولة مرة أخرى."
     },
     "EConnReset" : {
-      "title" : "The Ledger application store can't be reached",
-      "description" : "Your internet connection may be down or using unusual configuration. Start by verifying if anything is blocking your connection (proxy or firewall). If the problem persists click below for solutions or reach out to our customer support."
+      "title" : "لا يمكن الوصول إلى متجر تطبيقات Ledger",
+      "description" : "اتصالك بالإنترنت قد يكون مقطوعاً أو يستخدم تكويناً غير معتاد. ابدأ بالتحقق مما إذا كان هناك شيء يحجب اتصالك (وكيل أو جدار حماية). إذا استمرت المشكلة انقر أدناه لإيجاد حلول أو توَاصل مع دعم العملاء لدينا."
     },
     "EnpointConfig" : {
       "title" : "نقطة نهاية غير صالحة",
