@@ -84,11 +84,11 @@ jobs:
       - name: Create iOS simulator
         id: simulator
         run: |
-          echo "id=$(xcrun simctl create \"iPhone 13\" \"iPhone 13\" \"com.apple.CoreSimulator.SimRuntime.iOS-16-2\")" >> $GITHUB_OUTPUT
+          echo 'id=$(xcrun simctl create "iPhone 13" "iPhone 13" "com.apple.CoreSimulator.SimRuntime.iOS-16-2")' >> $GITHUB_OUTPUT
 
       - name: Test iOS app
         run: |
-          pnpm mobile e2e:test -c ios.sim.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --record-performance all --detectOpenHandles --cleanup --headless
+          pnpm mobile e2e:test -c ios.sim.release --record-logs all --take-screenshots all --record-videos failing --record-performance all --detectOpenHandles --cleanup --headless
 
       - name: Delete iOS simulator
         if: always() && steps.simulator.outcome == 'success'
