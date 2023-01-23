@@ -81,9 +81,19 @@ jobs:
         run: |
           pnpm mobile e2e:build -c ios.sim.release
 
+      - name: Create iOS simulator
+        id: simulator
+        run: |
+          echo "id=$(xcrun simctl create \"iPhone 13\" \"iPhone 13\" \"com.apple.CoreSimulator.SimRuntime.iOS-16-2\")" >> $GITHUB_OUTPUT
+
       - name: Test iOS app
         run: |
           pnpm mobile e2e:test -c ios.sim.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --record-performance all --detectOpenHandles --cleanup --headless
+
+      - name: Delete iOS simulator
+        if: steps.simulator.conclusion == 'success'
+        run: |
+          xcrun simctl erase ${{ steps.simulator.outputs.id }}
 
       - name: Upload test artifacts
         uses: actions/upload-artifact@v2
