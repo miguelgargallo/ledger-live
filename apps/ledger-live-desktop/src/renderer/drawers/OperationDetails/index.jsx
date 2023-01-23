@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo, Component, useCallback } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
@@ -9,6 +9,7 @@ import styled from "styled-components";
 import uniq from "lodash/uniq";
 import { getEnv } from "@ledgerhq/live-common/env";
 import { colors } from "~/renderer/styles/theme";
+import Alert from "~/renderer/components/Alert";
 
 import {
   findSubAccountById,
@@ -34,8 +35,8 @@ import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import CounterValue from "~/renderer/components/CounterValue";
-import Ellipsis from "~/renderer/components/Ellipsis";
 import FakeLink from "~/renderer/components/FakeLink";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import Link from "~/renderer/components/Link";
@@ -74,6 +75,7 @@ import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import AmountDetails from "./AmountDetails";
 import NFTOperationDetails from "./NFTOperationDetails";
+import { openModal } from "~/renderer/actions/modals";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -238,6 +240,16 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
       ? currency.parentCurrency.name
       : currency.name
     : undefined;
+  const isOptimistic = operation.blockHeight === null;
+  const editable =
+    isOptimistic && !isConfirmed && operation.type === "OUT" && currency.id === "ethereum";
+
+  const dispatch = useDispatch();
+  const handleOpenEditModal = useCallback(() => {
+    dispatch(openModal("MODAL_EDIT_TRANSACTION"));
+  }, [dispatch]);
+
+  // dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftId }));
 
   return (
     <Box flow={3} px={20} mt={20}>
@@ -273,6 +285,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
             }}
             type={type}
             withTooltip={false}
+            editable={editable}
           />
         )}
       </Box>
@@ -284,7 +297,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         mt={0}
         mb={1}
       >
-        <Trans i18nKey={`operation.type.${operation.type}`} />
+        <Trans i18nKey={`operation.type.${editable ? "SENDING" : operation.type}`} />
       </Text>
       {/* TODO clean up these conditional components into currency specific blocks */}
       {!isNftOperation ? (
@@ -345,6 +358,19 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
             label={t("operationDetails.viewOperation")}
           />
         </Box>
+      ) : null}
+      {editable ? (
+        <Alert type="primary">
+          <Trans i18nKey="operation.edit.description" />
+          <div>
+            <Link
+              style={{ textDecoration: "underline", fontSize: "13px" }}
+              onClick={handleOpenEditModal}
+            >
+              <Trans i18nKey="operation.edit.title" />
+            </Link>
+          </div>
+        </Alert>
       ) : null}
       {!isNftOperation ? (
         <OpDetailsSection>

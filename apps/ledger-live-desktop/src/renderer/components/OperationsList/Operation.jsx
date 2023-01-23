@@ -88,7 +88,8 @@ class OperationComponent extends PureComponent<Props> {
     const unit = getAccountUnit(account);
     const mainAccount = getMainAccount(account, parentAccount);
     const isConfirmed = isConfirmedOperation(operation, mainAccount, confirmationsNb);
-
+    const editable =
+      !isConfirmed && isOptimistic && currency.id === "ethereum" && operation.type === "OUT";
     return (
       <OperationRow
         className="operation-row"
@@ -101,8 +102,9 @@ class OperationComponent extends PureComponent<Props> {
           account={account}
           t={t}
           isConfirmed={isConfirmed}
+          editable={editable}
         />
-        <DateCell text={text} operation={operation} t={t} />
+        <DateCell text={text} operation={operation} editable={editable} t={t} />
         {withAccount && <AccountCell accountName={getAccountName(account)} currency={currency} />}
         {withAddress ? <AddressCell operation={operation} /> : <Box flex="1" />}
         <AmountCell

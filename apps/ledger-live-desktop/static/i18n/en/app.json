@@ -173,7 +173,38 @@
       "REGISTER": "Registered",
       "STAKE": "Staked",
       "UNSTAKE": "Unstaked",
-      "WITHDRAW_UNSTAKED": "Withdrawn"
+      "WITHDRAW_UNSTAKED": "Withdrawn",
+      "SENDING": "Sending"
+    },
+    "edit": {
+      "title": "Adjust network fees",
+      "description": "Your transaction is ongoing. You can replace it with a new one.",
+      "previousFeesInfo": "Your previous transaction had a network fee of",
+      "speedUp": {
+        "title": "Speed Up",
+        "description": "Re-submit the transaction with a higher network fee."
+      },
+      "cancel": {
+        "title": "Cancel",
+        "description": "Sending 0 ETH to your own address with a higher fee."
+      },
+      "steps": {
+        "method": {
+          "title": "Method"
+        },
+        "fees": {
+          "title": "Fees"
+        },
+        "summary": {
+          "title": "Summary"
+        },
+        "device": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation"
+        }
+      }
     }
   },
   "byteSize": {
