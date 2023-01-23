@@ -100,9 +100,11 @@ runs:
       with:
         name: report
         path: libs/ledger-live-common/report.json
-    - name: upload allure report
-      # TODO: for now, we put it in an artifact, replace by the actual allure integration
-      uses: actions/upload-artifact@v3
-      with:
-        name: allure
-        path: libs/ledger-live-common/allure
+    - name: Send Results and Generate Allure Report - Ledger-bot
+        uses: ./tools/actions/composites/upload-allure-report
+        if: always()
+        with:
+          platform: "ledgerbot"
+          login: ${{ secrets.ALLURE_LOGIN }}
+          password: ${{ secrets.ALLURE_PASSWORD }}
+          path: libs/ledger-live-common/allure
