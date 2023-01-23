@@ -86,7 +86,7 @@ jobs:
         id: simulator
         run: |
           xcrun simctl runtime list
-          ID=$(xcrun simctl create "iPhone 13" "iPhone 13" "com.apple.CoreSimulator.SimRuntime.iOS-16-2")
+          ID=$(xcrun simctl create "iPhone 13" "iPhone 13" "iOS 15.5")
           echo "id=$ID" >> $GITHUB_OUTPUT
 
       - name: Test iOS app
