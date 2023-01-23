@@ -91,7 +91,7 @@ jobs:
           pnpm mobile e2e:test -c ios.sim.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --record-performance all --detectOpenHandles --cleanup --headless
 
       - name: Delete iOS simulator
-        if: steps.simulator.conclusion == 'success'
+        if: always() && steps.simulator.outcome == 'success'
         run: |
           xcrun simctl erase ${{ steps.simulator.outputs.id }}
 
