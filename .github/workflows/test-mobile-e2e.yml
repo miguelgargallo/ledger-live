@@ -81,7 +81,7 @@ jobs:
       - name: Create iOS simulator
         id: simulator
         run: |
-          xcrun simctl runtime list
+          xcrun simctl delete all
           ID=$(xcrun simctl create "iPhone 13" "iPhone 13")
           echo "id=$ID" >> $GITHUB_OUTPUT
 
@@ -96,7 +96,7 @@ jobs:
       - name: Delete iOS simulator
         if: always()
         run: |
-          xcrun simctl erase ${{ steps.simulator.outputs.id }}
+          xcrun simctl delete ${{ steps.simulator.outputs.id }}
 
       - name: Upload test artifacts
         uses: actions/upload-artifact@v2
