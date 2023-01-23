@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import useEnv from "@ledgerhq/live-common/hooks/useEnv";
 import { useRemoteLiveAppContext } from "@ledgerhq/live-common/platform/providers/RemoteLiveAppProvider/index";
 import {
@@ -10,6 +10,7 @@ import { LiveAppManifest } from "@ledgerhq/live-common/platform/providers/types"
 import { AppManifest } from "@ledgerhq/live-common/platform/types";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+import { TextInput } from "react-native";
 import { ScreenName } from "../../../const";
 import { useBanner } from "../../../components/banners/hooks";
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
@@ -152,5 +153,33 @@ export function useDisclaimer() {
     close,
     toggleCheck,
     prompt: setManifest,
+  };
+}
+
+export function useSearch() {
+  const inputRef = useRef<TextInput>(null);
+  const [input, setInput] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  const [result, setResult] = useState<
+    { title: string; data: AppManifest[] }[]
+  >([]);
+
+  const onFocus = useCallback(() => {
+    setIsActive(true);
+  }, []);
+
+  const onCancel = useCallback(() => {
+    setIsActive(false);
+    inputRef.current?.blur();
+  }, []);
+
+  return {
+    inputRef,
+    input,
+    result,
+    isActive,
+    onChange: setInput,
+    onFocus,
+    onCancel,
   };
 }
