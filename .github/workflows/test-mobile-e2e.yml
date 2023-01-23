@@ -81,7 +81,6 @@ jobs:
       - name: Create iOS simulator
         id: simulator
         run: |
-          xcrun simctl delete all
           ID=$(xcrun simctl create "iPhone 13" "iPhone 13")
           echo "id=$ID" >> $GITHUB_OUTPUT
 
