@@ -54,4 +54,10 @@ setSupportedCurrencies([
   "songbird",
   "flare",
   "near",
+  "rsk",
+  "bittorrent",
+  "kava_evm",
+  "evmos_evm",
+  "energy_web",
+  "astar",
 ]);
