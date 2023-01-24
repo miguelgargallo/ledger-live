@@ -194,7 +194,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Create Emulator
         run: |
-          emulator -verbose -no-boot-anim -no-audio -no-window -gpu swiftshader_indirect -camera-back none @Pixel_5_API_31
+          sdkmanager emulator -verbose -no-boot-anim -no-audio -no-window -gpu swiftshader_indirect -camera-back none @Pixel_5_API_31
           booted=0
           while [ "$booted" != "1" ]
           do
