@@ -194,19 +194,20 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Create Emulator
         run: |
-          emulator --verbose --no-boot-anim --no-audio --no-window --gpu swiftshader_indirect --camera-back none @Pixel_5_API_31
-          booted=0
-          while [ "$booted" != "1" ]
-          do
-            echo "Waiting for emulator..."
-            booted=`adb shell getprop dev.bootcomplete`
-            sleep 1
-          done
-          adb shell top
-          adb shell settings put system show_touches 1
-          adb shell settings put system pointer_location 1
-          adb root
+          sdkmanager --list
 
+        # emulator --verbose --no-boot-anim --no-audio --no-window --gpu swiftshader_indirect --camera-back none @Pixel_5_API_31
+        # booted=0
+        # while [ "$booted" != "1" ]
+        # do
+        #   echo "Waiting for emulator..."
+        #   booted=`adb shell getprop dev.bootcomplete`
+        #   sleep 1
+        # done
+        # adb shell top
+        # adb shell settings put system show_touches 1
+        # adb shell settings put system pointer_location 1
+        # adb root
       # - name: create AVD and generate snapshot for caching
       #   uses: reactivecircus/android-emulator-runner@v2
       #   with:
