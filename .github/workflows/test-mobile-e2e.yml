@@ -180,8 +180,9 @@ jobs:
         uses: android-actions/setup-android@v2.0.8
       - name: Create SDK
         run: |
-          sdkmanager --install "system-images;android-31;default;x86_64"
+          sdkmanager --install "system-images;android-31;default;x86_64" "build-tools;33.0.0" platform-tools "platforms;android-31"
           yes | sdkmanager --licenses
+          sdkmanager --install emulator
           avdmanager --verbose create avd --force --name Pixel_5_API_31 --abi x86_64 --device "pixel" --package "system-images;android-31;default;x86_64"
           avdmanager list avd
       - name: Install dependencies
@@ -192,58 +193,56 @@ jobs:
           pnpm build:llm:deps
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
-      # - name: Create Emulator
-      #   run: |
-      #     sdkmanager --list
-
-      # emulator --verbose --no-boot-anim --no-audio --no-window --gpu swiftshader_indirect --camera-back none @Pixel_5_API_31
-      # booted=0
-      # while [ "$booted" != "1" ]
-      # do
-      #   echo "Waiting for emulator..."
-      #   booted=`adb shell getprop dev.bootcomplete`
-      #   sleep 1
-      # done
-      # adb shell top
-      # adb shell settings put system show_touches 1
-      # adb shell settings put system pointer_location 1
-      # adb root
-      - name: create AVD and generate snapshot for caching
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 31
-          arch: x86_64
-          target: default
-          avd-name: "Pixel_5_API_31"
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          cores: 4
-          ram-size: 4096M
-          heap-size: 512M
-          disk-size: 4096M
-          script: echo "Generated AVD snapshot for caching."
+      - name: Create Emulator
+        run: |
+          emulator --verbose --no-boot-anim --no-audio --no-window --gpu swiftshader_indirect --camera-back none @Pixel_5_API_31
+          booted=0
+          while [ "$booted" != "1" ]
+          do
+            echo "Waiting for emulator..."
+            booted=`adb shell getprop dev.bootcomplete`
+            sleep 1
+          done
+          adb shell top
+          adb shell settings put system show_touches 1
+          adb shell settings put system pointer_location 1
+          adb root
+      # - name: create AVD and generate snapshot for caching
+      #   uses: reactivecircus/android-emulator-runner@v2
+      #   with:
+      #     api-level: 31
+      #     arch: x86_64
+      #     target: default
+      #     avd-name: "Pixel_5_API_31"
+      #     force-avd-creation: false
+      #     emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+      #     disable-animations: false
+      #     cores: 4
+      #     ram-size: 4096M
+      #     heap-size: 512M
+      #     disk-size: 4096M
+      #     script: echo "Generated AVD snapshot for caching."
       - name: Build Android app for Detox test run
         run: |
           pnpm mobile e2e:build -c android.emu.release
-      - name: Run Android tests
-        uses: reactivecircus/android-emulator-runner@v2
-        timeout-minutes: 20
-        with:
-          api-level: 31
-          arch: x86_64
-          target: default
-          avd-name: "Pixel_5_API_31"
-          force-avd-creation: false
-          emulator-options: -verbose -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          cores: 4
-          ram-size: 4096M
-          heap-size: 512M
-          disk-size: 4096M
-          script: pnpm mobile e2e:test -c android.emu.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
       # - name: Run Android tests
-      #   run: |
-      #     pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
+      #   uses: reactivecircus/android-emulator-runner@v2
+      #   timeout-minutes: 20
+      #   with:
+      #     api-level: 31
+      #     arch: x86_64
+      #     target: default
+      #     avd-name: "Pixel_5_API_31"
+      #     force-avd-creation: false
+      #     emulator-options: -verbose -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+      #     cores: 4
+      #     ram-size: 4096M
+      #     heap-size: 512M
+      #     disk-size: 4096M
+      #     script: pnpm mobile e2e:test -c android.emu.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
+      - name: Run Android tests
+        run: |
+          pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
       # - name: Close the emulator
       #   run: |
       #     killall qemu-system-x86_64-headless
