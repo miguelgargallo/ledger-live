@@ -117,8 +117,6 @@ jobs:
   start-runner:
     name: Start self-hosted EC2 runner
     runs-on: [ledger-live, linux]
-    needs: [pr-is-fork]
-    if: ${{ !fromJSON(needs.pr-is-fork.outputs.pr-is-fork) }}
     outputs:
       label: ${{ steps.start-ec2-linux-runner.outputs.label }}
       ec2-instance-id: ${{ steps.start-ec2-linux-runner.outputs.ec2-instance-id }}
@@ -137,7 +135,7 @@ jobs:
 
   stop-runner:
     name: Stop self-hosted EC2 runner
-    if: ${{ always() && needs.start-runner.result == 'success' && !fromJSON(needs.pr-is-fork.outputs.pr-is-fork) }}
+    if: ${{ always() && needs.start-runner.result == 'success' }}
     needs: [start-runner, detox-tests-android]
     runs-on: [ledger-live, linux]
     steps:
