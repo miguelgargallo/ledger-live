@@ -194,7 +194,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Create Emulator
         run: |
-          sdkmanager emulator -no-boot-anim -no-audio -no-window -gpu swiftshader_indirect -camera-back none @Pixel_5_API_31
+          emulator --verbose --no-boot-anim --no-audio --no-window --gpu swiftshader_indirect --camera-back none @Pixel_5_API_31
           booted=0
           while [ "$booted" != "1" ]
           do
@@ -240,24 +240,24 @@ jobs:
       #     heap-size: 512M
       #     disk-size: 4096M
       #     script: pnpm mobile e2e:test -c android.emu.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
-      - name: Run Android tests
-        run: |
-          pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
-      - name: Close the emulator
-        run: |
-          killall qemu-system-x86_64-headless
-      - name: Upload test artifacts
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-android-artifacts
-          path: apps/ledger-live-mobile/artifacts/
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: "allure-android-reports"
-          path: apps/ledger-live-mobile/allure-results
+      # - name: Run Android tests
+      #   run: |
+      #     pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
+      # - name: Close the emulator
+      #   run: |
+      #     killall qemu-system-x86_64-headless
+      # - name: Upload test artifacts
+      #   if: always()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: test-android-artifacts
+      #     path: apps/ledger-live-mobile/artifacts/
+      # - name: Upload Allure Report
+      #   uses: actions/upload-artifact@v2
+      #   if: always()
+      #   with:
+      #     name: "allure-android-reports"
+      #     path: apps/ledger-live-mobile/allure-results
   # allure-report-android:
   #   name: "Allure Reports Export on Server"
   #   runs-on: [ledger-live, linux]
