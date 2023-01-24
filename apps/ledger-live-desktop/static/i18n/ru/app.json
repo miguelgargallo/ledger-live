@@ -131,7 +131,7 @@
     "nanoS" : "Nano S",
     "nanoSP" : "Nano S Plus",
     "nanoX" : "Nano X",
-    "nanoFTS" : "Nano FTS",
+    "stax" : "Stax",
     "blue" : "Blue"
   },
   "operation" : {
@@ -3396,7 +3396,7 @@
       "title" : "Приумножайте ETH",
       "lido" : {
         "tag" : "Без минимальной суммы",
-        "description" : "Застейкайте эфиры (ETH) через Lido и получайте ежедневные вознаграждения. Причём без периода блокировки и минимальной суммы."
+        "description" : "Стейкайте ETH в Lido и получайте вознаграждения. Без периода блокировки и минимальной суммы."
       },
       "kiln" : {
         "tag" : "От 32 ETH",
@@ -5254,7 +5254,7 @@
       "title" : "Сумма для разморозки не может быть меньше 1"
     },
     "TronSendTrc20ToNewAccountForbidden" : {
-      "title" : "Чтобы активировать приём токенов TRC-20, на этот адрес начала нужно отправить не менее 0,1 TRX.",
+      "title" : "Чтобы активировать приём токенов TRC-20, на этот адрес сначала нужно отправить минимум 0,1 TRX.",
       "description" : "Счёт получателя нужно активировать перед отправкой на него токенов TRC-20. Чтобы активировать его, отправьте на него токены TRX или TRC-10."
     },
     "TronUnexpectedFees" : {
@@ -5497,6 +5497,14 @@
       "title" : "Устройство заблокировано",
       "description" : "Разблокируйте устройство и повторите попытку.",
       "descriptionWithProductName" : "Разблокируйте {{ productName }} и повторите попытку."
+    },
+    "DeviceNotOnboardedError" : {
+      "title" : "Устройство не готово",
+      "titleWithProductName" : "Устройство {{ productName }} не готово",
+      "description" : "Сначала устройство нужно настроить.\nМы поможем вам с этим.",
+      "descriptionWithProductName" : "Сначала {{ productName }} необходимо настроить.\nМы поможем вам с этим.",
+      "goToOnboardingButton" : "Настроить устройство",
+      "goToOnboardingButtonWithProductName" : "Настроить {{ productName }}"
     }
   },
   "cryptoOrg" : {
@@ -5559,8 +5567,7 @@
     "postOnboarding" : {
       "title" : "Персонализируйте устройство",
       "description" : "Благодаря гибким настройкам экрана",
-      "actionCompletedPopupLabel" : "Устройство персонализировано",
-      "actionCompletedHubTitle" : "Ваш экран выглядит восхитительно!"
+      "actionCompletedPopupLabel" : "Устройство персонализировано"
     },
     "customImageSet" : "Пользовательское изображение установлено",
     "finishCTA" : "Завершить"
