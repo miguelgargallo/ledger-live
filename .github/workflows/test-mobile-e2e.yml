@@ -241,9 +241,9 @@ jobs:
       #     heap-size: 512M
       #     disk-size: 4096M
       #     script: pnpm mobile e2e:test -c android.emu.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
-      # - name: Run Android tests
-      #   run: |
-      #     pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
+      - name: Run Android tests
+        run: |
+          pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
       # - name: Close the emulator
       #   run: |
       #     killall qemu-system-x86_64-headless
