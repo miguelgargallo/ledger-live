@@ -31,6 +31,8 @@ type WildcardNavigation = StackNavigationProp<
   Record<string, object | undefined>
 >;
 
+const debug = true;
+
 const { interpolateNode, Extrapolate } = Animated;
 const AnimatedView = Animatable.View;
 const hitSlop = {
@@ -205,7 +207,7 @@ export default function AnimatedHeaderViewV2({
               <LText
                 variant="subtitle"
                 numberOfLines={4}
-                style={{ color: "#999" }}
+                style={[styles.subtitle]}
               >
                 {subtitle}
               </LText>
@@ -240,7 +242,11 @@ export default function AnimatedHeaderViewV2({
                   {listTitle}
                 </LText>
               </Animated.View>
-              <ScrollContainer style={styles.listScrollContainer} horizontal>
+              <ScrollContainer
+                style={styles.listScrollContainer}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              >
                 {list.map((value: string, index) => (
                   <Flex mr={index === list.length - 1 ? 8 : 7} key={index}>
                     <View
@@ -308,7 +314,7 @@ const styles = StyleSheet.create({
   },
   header: {
     ...Styles.headerNoShadow,
-    backgroundColor: "transparent",
+    backgroundColor: debug ? "red" : "transparent",
     width: "100%",
     paddingTop: Platform.OS === "ios" ? 0 : 40,
     flexDirection: "column",
@@ -316,19 +322,30 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   titleContainer: {
-    paddingHorizontal: 16,
     zIndex: 2,
+    paddingLeft: 16,
+    backgroundColor: debug ? "blue" : "transparent",
   },
   title: {
     lineHeight: 45,
+    Bottom: 2,
+    borderWidth: debug ? 2 : 0,
+    borderColor: "purple",
+  },
+  subtitle: {
+    color: "#999",
+    marginTop: 4,
   },
   listCategory: {
     width,
     paddingTop: 20,
+    borderWidth: debug ? 2 : 0,
+    borderColor: "green",
   },
   listCategoryTitle: {
     paddingLeft: 16,
     paddingBottom: Platform.OS === "ios" ? 10 : 5,
+    backgroundColor: debug ? "red" : "transparent",
   },
   listScrollContainer: {
     marginTop: 4,
@@ -336,6 +353,8 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     zIndex: 3,
     height: 50,
+    borderWidth: debug ? 2 : 0,
+    borderColor: "purple",
   },
   buttons: {
     paddingVertical: 16,
@@ -343,12 +362,15 @@ const styles = StyleSheet.create({
   containerScrollArea: {
     marginTop: 0,
     zIndex: -10,
+    backgroundColor: debug ? "blue" : "transparent",
   },
   scrollArea: {
     paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingTop: 48,
     paddingBottom: 116,
     zIndex: -10,
+    borderWidth: debug ? 2 : 0,
+    borderColor: "red",
   },
 });
 

@@ -2,16 +2,13 @@
 
 import React, { useCallback, useMemo, memo } from "react";
 import { useTheme } from "@react-navigation/native";
-import { StyleSheet, View, Platform, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import type {
   AppBranch,
   AppManifest,
 } from "@ledgerhq/live-common/platform/types";
-import { translateContent } from "@ledgerhq/live-common/platform/logic";
-import { useLocale } from "../../../context/Locale";
 import LText from "../../../components/LText";
-import IconChevron from "../../../icons/ArrowRight";
 import AppIcon from "../AppIcon";
 import { Theme } from "../../../colors";
 
@@ -58,7 +55,6 @@ type Props = {
 
 const AppCard = ({ manifest, onPress }: Props) => {
   const { colors } = useTheme();
-  const { locale } = useLocale();
   const { t } = useTranslation();
   const isDisabled = manifest.branch === "soon";
   const handlePress = useCallback(
@@ -69,29 +65,14 @@ const AppCard = ({ manifest, onPress }: Props) => {
     () => getBranchStyle(manifest.branch, colors),
     [colors, manifest.branch],
   );
-  const description = useMemo(
-    () => translateContent(manifest.content.shortDescription, locale),
-    [locale, manifest.content.shortDescription],
-  );
+
+  const url = useMemo(() => manifest.homepageUrl, [manifest.homepageUrl]);
   return (
     <TouchableOpacity disabled={isDisabled} onPress={handlePress}>
-      <View
-        style={[
-          styles.wrapper,
-          {
-            backgroundColor: colors.card,
-            ...Platform.select({
-              android: {},
-              ios: {
-                shadowColor: colors.black,
-              },
-            }),
-          },
-        ]}
-      >
+      <View style={[styles.wrapper]}>
         <AppIcon
           isDisabled={isDisabled}
-          size={48}
+          size={52}
           name={manifest.name}
           icon={manifest.icon}
         />
@@ -134,12 +115,11 @@ const AppCard = ({ manifest, onPress }: Props) => {
                 color: colors.smoke,
               },
             ]}
-            numberOfLines={2}
+            numberOfLines={1}
           >
-            {description}
+            {url}
           </LText>
         </View>
-        {!isDisabled && <IconChevron size={18} color={colors.smoke} />}
       </View>
     </TouchableOpacity>
   );
@@ -150,22 +130,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
-    borderRadius: 4,
-    marginBottom: 16,
-    ...Platform.select({
-      android: {
-        elevation: 1,
-      },
-      ios: {
-        shadowOpacity: 0.03,
-        shadowRadius: 8,
-        shadowOffset: {
-          width: 0,
-          height: 4,
-        },
-      },
-    }),
+    marginBottom: 28,
   },
   content: {
     marginHorizontal: 16,
@@ -176,6 +141,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
+    marginBottom: 4,
   },
   title: {
     flexGrow: 0,
@@ -183,7 +149,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   description: {
-    fontSize: 14,
+    fontSize: 13,
   },
   branch: {
     fontSize: 9,

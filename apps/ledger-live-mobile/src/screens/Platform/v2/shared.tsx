@@ -20,7 +20,7 @@ const defaultArray: LiveAppManifest[] = [];
 
 export function useCategories() {
   const manifests = useFilteredManifests();
-  const categories = useCategoriesRaw(manifests);
+  const categories: string[] = useCategoriesRaw(manifests);
   const { res: manifestsByCategory, setCategory } =
     useManifestsByCategory(manifests);
 
@@ -49,10 +49,10 @@ export function useFilteredManifests(filterParamsOverride?: FilterParams) {
   }, [manifests, experimental, filterParamsOverride]);
 }
 
-function useCategoriesRaw(manifests: AppManifest[]) {
+function useCategoriesRaw(manifests: AppManifest[]): string[] {
   return useMemo(() => {
     const res = manifests.reduce((res, manifest) => {
-      manifest.categories.forEach(c => {
+      manifest.categories.forEach((c: string) => {
         res.add(c);
       });
 

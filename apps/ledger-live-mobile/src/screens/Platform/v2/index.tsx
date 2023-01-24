@@ -55,15 +55,17 @@ export default function PlatformCatalogV2() {
       {/* TODO: put under the animation header and style  */}
       <Flex flexDirection="row">
         <Flex flex={1}>
-          <SearchInput
-            data-test-id="platform-catalog-search-input"
-            ref={inputRef}
-            value={input}
-            onChange={onChange}
-            placeholder={t("common.search")}
-            onFocus={onFocus}
-            onBlur={onCancel}
-          />
+          {false && (
+            <SearchInput
+              data-test-id="platform-catalog-search-input"
+              ref={inputRef}
+              value={input}
+              onChange={onChange}
+              placeholder={t("common.search")}
+              onFocus={onFocus}
+              onBlur={onCancel}
+            />
+          )}
         </Flex>
 
         {isActive ? (
