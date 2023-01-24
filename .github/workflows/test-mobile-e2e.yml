@@ -178,9 +178,12 @@ jobs:
           cache: "gradle"
       - name: setup Android SDK
         uses: android-actions/setup-android@v2.0.8
-      - name: Test SDK
+      - name: Create SDK
         run: |
-          sdkmanager --version
+          sdkmanager --install "system-images;android-31;default;x86_64"
+          yes | sdkmanager --licenses
+          avdmanager --verbose create avd --force --name Pixel_5_API_31 --abi x86_64 --device "pixel" --package "system-images;android-31;default;x86_64"
+          avdmanager list avd
       - name: Install dependencies
         run: |
           pnpm i --filter="live-mobile..." --filter="ledger-live" --no-frozen-lockfile --unsafe-perm
@@ -189,6 +192,21 @@ jobs:
           pnpm build:llm:deps
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
+      - name: Create Emulator
+        run: |
+          emulator -verbose -no-boot-anim -no-audio -no-window -gpu swiftshader_indirect -camera-back none @Pixel_5_API_31
+          booted=0
+          while [ "$booted" != "1" ]
+          do
+            echo "Waiting for emulator..."
+            booted=`adb shell getprop dev.bootcomplete`
+            sleep 1
+          done
+          adb shell top
+          adb shell settings put system show_touches 1
+          adb shell settings put system pointer_location 1
+          adb root
+
       # - name: create AVD and generate snapshot for caching
       #   uses: reactivecircus/android-emulator-runner@v2
       #   with:
@@ -222,6 +240,12 @@ jobs:
       #     heap-size: 512M
       #     disk-size: 4096M
       #     script: pnpm mobile e2e:test -c android.emu.release --loglevel verbose --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
+      - name: Run Android tests
+        run: |
+          pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
+      - name: Close the emulator
+        run: |
+          killall qemu-system-x86_64-headless
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v2
