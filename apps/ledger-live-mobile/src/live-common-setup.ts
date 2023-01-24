@@ -166,10 +166,13 @@ registerTransportModule({
 });
 
 if (process.env.NODE_ENV === "production") {
-  axios.defaults.headers.common["User-Agent"] =
+  const value =
     Platform.OS === "ios"
-      ? `Live-IOS/${VersionNumber.appVersion}`
-      : `Live-Android/${VersionNumber.appVersion}`;
+      ? `llm-ios/${VersionNumber.appVersion}`
+      : `llm-android/${VersionNumber.appVersion}`;
+  setEnv("LEDGER_CLIENT_VERSION", value);
+  // deprecated: move this logic in live-common (axios may be dropped in future)
+  axios.defaults.headers.common["X-Ledger-Client-Version"] = value;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

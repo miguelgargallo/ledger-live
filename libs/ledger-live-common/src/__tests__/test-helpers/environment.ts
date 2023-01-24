@@ -1,11 +1,13 @@
 import winston from "winston";
 import { listen } from "@ledgerhq/logs";
+import axios from "axios";
 import { setSupportedCurrencies } from "../../currencies";
 import { setPlatformVersion } from "../../platform/version";
 import { EnvName, setEnvUnsafe } from "../../env";
 import { setWalletAPIVersion } from "../../wallet-api/version";
 import { WALLET_API_VERSION } from "../../wallet-api/constants";
 import { PLATFORM_VERSION } from "../../platform/constants";
+import { setEnv } from "../../env";
 
 setPlatformVersion(PLATFORM_VERSION);
 setWalletAPIVersion(WALLET_API_VERSION);
@@ -98,3 +100,8 @@ listen(({ type, message, ...rest }) => {
     ...rest,
   });
 });
+
+const value = "ll-ci/0.0.0";
+setEnv("LEDGER_CLIENT_VERSION", value);
+// deprecated: move this logic in live-common (axios may be dropped in future)
+axios.defaults.headers.common["X-Ledger-Client-Version"] = value;

@@ -11,5 +11,8 @@ listenLogs(({ id, date, ...log }) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  axios.defaults.headers.common["User-Agent"] = `Live-Desktop/${__APP_VERSION__}`;
+  const value = `lld/${__APP_VERSION__}`;
+  setEnv("LEDGER_CLIENT_VERSION", value);
+  // deprecated: move this logic in live-common (axios may be dropped in future)
+  axios.defaults.headers.common["X-Ledger-Client-Version"] = value;
 }
