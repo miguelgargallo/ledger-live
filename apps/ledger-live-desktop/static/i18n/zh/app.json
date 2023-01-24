@@ -131,7 +131,7 @@
     "nanoS" : "Nano S",
     "nanoSP" : "Nano S Plus",
     "nanoX" : "Nano X",
-    "nanoFTS" : "Nano FTS",
+    "stax" : "Stax",
     "blue" : "Blue"
   },
   "operation" : {
@@ -5497,6 +5497,14 @@
       "title" : "您的设备已经锁定",
       "description" : "解锁您的设备并重试。",
       "descriptionWithProductName" : "解锁您的 {{ productName }} 并重试。"
+    },
+    "DeviceNotOnboardedError" : {
+      "title" : "您的设备尚未准备好使用",
+      "titleWithProductName" : "{{ productName }} 设备尚未准备就绪",
+      "description" : "您需要先设置您的设备。\n我们将引导您完成设置流程。",
+      "descriptionWithProductName" : "您需要先设置 {{ productName }}。\n我们将引导您完成设置流程。",
+      "goToOnboardingButton" : "设置我的设备",
+      "goToOnboardingButtonWithProductName" : "设置我的 {{ productName }}"
     }
   },
   "cryptoOrg" : {
@@ -5559,8 +5567,7 @@
     "postOnboarding" : {
       "title" : "个性化我的设备",
       "description" : "通过自定义屏幕",
-      "actionCompletedPopupLabel" : "设备已个性化",
-      "actionCompletedHubTitle" : "那个屏幕看起来很简洁。"
+      "actionCompletedPopupLabel" : "设备已个性化"
     },
     "customImageSet" : "自定义图片集",
     "finishCTA" : "完成"
