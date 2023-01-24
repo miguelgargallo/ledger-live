@@ -20,11 +20,16 @@ const defaultArray: LiveAppManifest[] = [];
 
 export function useCategories() {
   const manifests = useFilteredManifests();
-  const categories: string[] = useCategoriesRaw(manifests);
-  const { res: manifestsByCategory, setCategory } =
-    useManifestsByCategory(manifests);
+  const { categories, manifestsByCategories } = useCategoriesRaw(manifests);
+  const [selected, setSelected] = useState("all");
 
-  return { manifests, categories, manifestsByCategory, setCategory };
+  return {
+    manifests,
+    categories,
+    manifestsByCategories,
+    selected,
+    setSelected,
+  };
 }
 
 export function useFilteredManifests(filterParamsOverride?: FilterParams) {
@@ -49,32 +54,32 @@ export function useFilteredManifests(filterParamsOverride?: FilterParams) {
   }, [manifests, experimental, filterParamsOverride]);
 }
 
-function useCategoriesRaw(manifests: AppManifest[]): string[] {
-  return useMemo(() => {
-    const res = manifests.reduce((res, manifest) => {
-      manifest.categories.forEach((c: string) => {
-        res.add(c);
+function useCategoriesRaw(manifests: AppManifest[]): {
+  categories: string[];
+  manifestsByCategories: Map<string, AppManifest[]>;
+} {
+  const manifestsByCategories = useMemo(() => {
+    const res = manifests.reduce((res, m) => {
+      m.categories.forEach(c => {
+        const list = res.has(c) ? [...res.get(c), m] : [m];
+        res.set(c, list);
       });
 
       return res;
-    }, new Set(["all"]));
+    }, new Map().set("all", manifests));
 
-    return Array.from(res);
+    return res;
   }, [manifests]);
-}
 
-function useManifestsByCategory(manifests: AppManifest[]) {
-  const [category, setCategory] = useState("all");
-
-  const res = useMemo(
-    () =>
-      category === "all"
-        ? manifests
-        : manifests.filter(m => m.categories.includes(category)),
-    [category, manifests],
+  const categories = useMemo(
+    () => [...manifestsByCategories.keys()],
+    [manifestsByCategories],
   );
 
-  return { res, setCategory };
+  return {
+    categories,
+    manifestsByCategories,
+  };
 }
 
 export function useDeeplinkEffect(

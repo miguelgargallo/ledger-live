@@ -21,8 +21,13 @@ export default function PlatformCatalogV2() {
 
   const { result, input, inputRef, onChange, isActive, onFocus, onCancel } =
     useSearch();
-  const { manifests, categories, manifestsByCategory, setCategory } =
-    useCategories();
+  const {
+    manifests,
+    categories,
+    manifestsByCategories,
+    selected,
+    setSelected,
+  } = useCategories();
   const {
     name,
     icon,
@@ -84,7 +89,7 @@ export default function PlatformCatalogV2() {
         hasBackButton
         list={categories}
         listTitle={"Categories"}
-        listElementAction={setCategory}
+        listElementAction={setSelected}
       >
         <TrackScreen category="Platform" name="Catalog" />
         <DAppDisclaimer
@@ -100,16 +105,18 @@ export default function PlatformCatalogV2() {
         {isActive ? (
           <SectionList
             sections={result}
-            renderItem={({ item }) => <Text>{item.data}</Text>}
+            renderItem={({ item }) => <Text>{item}</Text>}
           />
         ) : (
-          manifestsByCategory.map(manifest => (
-            <AppCard
-              key={`${manifest.id}.${manifest.branch}`}
-              manifest={manifest}
-              onPress={onSelect}
-            />
-          ))
+          manifestsByCategories
+            .get(selected)
+            ?.map(manifest => (
+              <AppCard
+                key={`${manifest.id}.${manifest.branch}`}
+                manifest={manifest}
+                onPress={onSelect}
+              />
+            ))
         )}
         <View style={styles.bottomPadding} />
       </AnimatedHeaderViewV2>
