@@ -11,6 +11,8 @@ import { AppManifest } from "@ledgerhq/live-common/platform/types";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { TextInput } from "react-native";
+import Fuse from "fuse.js";
+import { useDebounce } from "@ledgerhq/live-common/hooks/useDebounce";
 import { ScreenName } from "../../../const";
 import { useBanner } from "../../../components/banners/hooks";
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
@@ -161,13 +163,37 @@ export function useDisclaimer() {
   };
 }
 
-export function useSearch() {
+// TODO: Move somewhere more appropriate
+export function useSearch<Item>({
+  list,
+  defaultInput = "",
+  options,
+}: {
+  list: Item[];
+  defaultInput?: string;
+  options: Fuse.IFuseOptions<Item>;
+}) {
   const inputRef = useRef<TextInput>(null);
-  const [input, setInput] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const [result, setResult] = useState<
-    { title: string; data: AppManifest[] }[]
-  >([]);
+
+  const [input, setInput] = useState(defaultInput);
+  const debouncedInput = useDebounce(input, 300);
+
+  const [isSearching, setIsSearching] = useState(false);
+
+  const [result, setResult] = useState(list);
+  // TODO: what if list chanegs
+  const fuse = useRef(new Fuse(list, options));
+
+  useEffect(() => {
+    if (debouncedInput) {
+      setIsSearching(true);
+      setResult(fuse.current.search(debouncedInput).map(res => res.item));
+    } else {
+      setResult([]);
+      setIsSearching(false);
+    }
+  }, [debouncedInput]);
 
   const onFocus = useCallback(() => {
     setIsActive(true);
@@ -183,6 +209,7 @@ export function useSearch() {
     input,
     result,
     isActive,
+    isSearching,
     onChange: setInput,
     onFocus,
     onCancel,

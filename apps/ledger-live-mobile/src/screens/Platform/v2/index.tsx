@@ -19,8 +19,6 @@ import DAppDisclaimer from "./DAppDisclaimer";
 export default function PlatformCatalogV2() {
   const { t } = useTranslation();
 
-  const { result, input, inputRef, onChange, isActive, onFocus, onCancel } =
-    useSearch();
   const {
     manifests,
     categories,
@@ -28,6 +26,20 @@ export default function PlatformCatalogV2() {
     selected,
     setSelected,
   } = useCategories();
+
+  const { result, input, inputRef, onChange, isActive, onFocus, onCancel } =
+    useSearch({
+      list: manifests,
+      options: {
+        keys: ["id", "name", "url"],
+      },
+    });
+
+  console.log(
+    "!!!result",
+    result.map(m => m.id),
+  );
+
   const {
     name,
     icon,
@@ -60,7 +72,7 @@ export default function PlatformCatalogV2() {
       {/* TODO: put under the animation header and style  */}
       <Flex flexDirection="row">
         <Flex flex={1}>
-          {false && (
+          {true && (
             <SearchInput
               data-test-id="platform-catalog-search-input"
               ref={inputRef}
@@ -102,22 +114,21 @@ export default function PlatformCatalogV2() {
           onContinue={onContinue}
         />
 
-        {isActive ? (
-          <SectionList
-            sections={result}
-            renderItem={({ item }) => <Text>{item}</Text>}
-          />
-        ) : (
-          manifestsByCategories
-            .get(selected)
-            ?.map(manifest => (
-              <AppCard
-                key={`${manifest.id}.${manifest.branch}`}
-                manifest={manifest}
-                onPress={onSelect}
-              />
-            ))
-        )}
+        {isActive
+          ? null
+          : /* <SectionList */
+            /*   sections={result} */
+            /*   renderItem={({ item }) => <Text>{item}</Text>} */
+            /* /> */
+            manifestsByCategories
+              .get(selected)
+              ?.map(manifest => (
+                <AppCard
+                  key={`${manifest.id}.${manifest.branch}`}
+                  manifest={manifest}
+                  onPress={onSelect}
+                />
+              ))}
         <View style={styles.bottomPadding} />
       </AnimatedHeaderViewV2>
     </TabBarSafeAreaView>
