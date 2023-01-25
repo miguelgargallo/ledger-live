@@ -5,7 +5,7 @@ import { add, isBefore, parseISO } from "date-fns";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import messaging from "@react-native-firebase/messaging";
 import useFeature from "@ledgerhq/live-common/featureFlags/useFeature";
-import { accountsWithPositiveBalanceSelector } from "../reducers/accounts";
+import { accountsWithPositiveBalanceCountSelector } from "../reducers/accounts";
 import {
   notificationsModalOpenSelector,
   notificationsModalTypeSelector,
@@ -116,7 +116,7 @@ const useNotifications = () => {
     notificationsDataOfUserSelector,
   );
   const accountsWithAmountCount = useSelector(
-    accountsWithPositiveBalanceSelector,
+    accountsWithPositiveBalanceCountSelector,
   );
 
   const dispatch = useDispatch();

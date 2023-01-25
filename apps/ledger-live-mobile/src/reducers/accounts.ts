@@ -4,6 +4,7 @@ import {
   createSelector,
   createSelectorCreator,
   defaultMemoize,
+  OutputSelector,
 } from "reselect";
 import uniq from "lodash/uniq";
 import {
@@ -37,6 +38,7 @@ import {
 } from "@ledgerhq/live-common/account/index";
 import { decodeNftId } from "@ledgerhq/live-common/nft/nftId";
 import { orderByLastReceived } from "@ledgerhq/live-common/nft/helpers";
+import { acc } from "react-native-reanimated";
 import type { AccountsState, State } from "./types";
 import type {
   AccountsDeleteAccountPayload,
@@ -52,7 +54,10 @@ import type {
 } from "../actions/types";
 import { AccountsActionTypes } from "../actions/types";
 import accountModel from "../logic/accountModel";
-import { hiddenNftCollectionsSelector } from "./settings";
+import {
+  blacklistedTokenIdsSelector,
+  hiddenNftCollectionsSelector,
+} from "./settings";
 
 export const INITIAL_STATE: AccountsState = {
   active: [],
@@ -422,10 +427,124 @@ export const hasLendEnabledAccountsSelector = createSelector(
 /**
  * Returns the number of accounts with a positive balance.
  */
-export const accountsWithPositiveBalanceSelector = createSelector(
+function accountHasPositiveBalance(account: AccountLike) {
+  return Boolean(account.balance?.gt(0));
+}
+
+export const accountsWithPositiveBalanceCountSelector = createSelector(
   accountsSelector,
-  acc => acc.filter(account => account.balance?.gt(0)).length,
+  acc => acc.filter(accountHasPositiveBalance).length,
 );
+
+/**
+ * Helpers
+ */
+
+type AccountsLikeSelector = OutputSelector<
+  State,
+  AccountLike[],
+  (res: Account[], res2: string[]) => AccountLike[]
+>;
+
+function makeAccountsCountSelectors(accountsSelector: AccountsLikeSelector) {
+  return createSelector(accountsSelector, accounts => accounts.length);
+}
+
+function makeHasAccountsSelectors(accountsSelector: AccountsLikeSelector) {
+  return createSelector(accountsSelector, accounts => accounts.length > 0);
+}
+
+function makeAccountsWithPositiveBalanceCountSelector(
+  accountsSelector: AccountsLikeSelector,
+) {
+  return createSelector(
+    accountsSelector,
+    accounts => accounts.filter(accountHasPositiveBalance).length,
+  );
+}
+
+function makeHasAccountsWithPositiveBalanceSelector(
+  accountsSelector: AccountsLikeSelector,
+) {
+  return createSelector(
+    accountsSelector,
+    accounts => accounts.filter(accountHasPositiveBalance).length > 0,
+  );
+}
+
+/**
+ *
+ */
+
+/**
+ * TOKEN-ACCOUNTS SELECTORS
+ */
+
+export const tokenAccountsSelector = createSelector(
+  accountsSelector,
+  accounts =>
+    flattenAccounts(accounts).filter(acc => acc.type === "TokenAccount"),
+);
+
+export const tokenAccountsNotBlacklistedSelector = createSelector(
+  tokenAccountsSelector,
+  blacklistedTokenIdsSelector,
+  (accounts, blacklistedIds) =>
+    accounts.filter(
+      acc => !blacklistedIds.includes(getAccountCurrency(acc).id),
+    ),
+);
+
+export const tokenAccountsCountSelector = makeAccountsCountSelectors(
+  tokenAccountsSelector,
+);
+export const tokenAccountsNotBlacklistedCountSelector =
+  makeAccountsCountSelectors(tokenAccountsNotBlacklistedSelector);
+
+export const hasTokenAccountsSelector = makeHasAccountsSelectors(
+  tokenAccountsSelector,
+);
+export const hasTokenAccountsNotBlacklistedSelector = makeHasAccountsSelectors(
+  tokenAccountsNotBlacklistedSelector,
+);
+
+export const tokenAccountsWithPositiveBalanceCountSelector =
+  makeAccountsWithPositiveBalanceCountSelector(tokenAccountsSelector);
+export const tokenAccountsNotBlackListedWithPositiveBalanceCountSelector =
+  makeAccountsWithPositiveBalanceCountSelector(
+    tokenAccountsNotBlacklistedSelector,
+  );
+
+export const hasTokenAccountsWithPositiveBalanceSelector =
+  makeHasAccountsWithPositiveBalanceSelector(tokenAccountsSelector);
+export const hasTokenAccountsNotBlackListedWithPositiveBalanceSelector =
+  makeHasAccountsWithPositiveBalanceSelector(
+    tokenAccountsNotBlacklistedSelector,
+  );
+
+/**
+ * NON-TOKEN-ACCOUNTS SELECTORS
+ */
+
+export const nonTokenAccountsSelector = createSelector(
+  accountsSelector,
+  accounts =>
+    flattenAccounts(accounts).filter(acc => acc.type !== "TokenAccount"),
+);
+
+export const nonTokenAccountsCountSelector = makeAccountsCountSelectors(
+  nonTokenAccountsSelector,
+);
+
+export const hasNonTokenAccountsSelector = makeHasAccountsSelectors(
+  nonTokenAccountsSelector,
+);
+
+export const nonTokenAccountsWithPositiveBalanceCountSelector =
+  makeAccountsWithPositiveBalanceCountSelector(nonTokenAccountsSelector);
+
+export const hasNonTokenAccountsWithPositiveBalanceSelector =
+  makeHasAccountsWithPositiveBalanceSelector(nonTokenAccountsSelector);
 
 /**
  * Returns the list of all the NFTs from non hidden collections accross all

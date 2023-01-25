@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { add, isBefore, parseISO } from "date-fns";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useFeature from "@ledgerhq/live-common/featureFlags/useFeature";
-import { accountsWithPositiveBalanceSelector } from "../reducers/accounts";
+import { accountsWithPositiveBalanceCountSelector } from "../reducers/accounts";
 import {
   ratingsModalOpenSelector,
   ratingsModalLockedSelector,
@@ -81,7 +81,7 @@ const useRatings = () => {
   const ratingsDataOfUser = useSelector(ratingsDataOfUserSelector);
 
   const accountsWithAmountCount = useSelector(
-    accountsWithPositiveBalanceSelector,
+    accountsWithPositiveBalanceCountSelector,
   );
 
   const dispatch = useDispatch();
