@@ -33,6 +33,7 @@ import {
   clearAccount,
   nestedSortAccounts,
   makeEmptyTokenAccount,
+  isAccountBalanceUnconfirmed,
 } from "@ledgerhq/live-common/account/index";
 import { decodeNftId } from "@ledgerhq/live-common/nft/nftId";
 import { orderByLastReceived } from "@ledgerhq/live-common/nft/helpers";
@@ -185,10 +186,12 @@ export const accountsCountSelector = createSelector(
   accountsSelector,
   acc => acc.length,
 );
+/** Returns a boolean that is true if and only if all accounts are empty */
 export const hasNoAccountsSelector = createSelector(
   accountsSelector,
   acc => acc.length <= 0,
 );
+/** Returns a boolean that is true if and only if all accounts are empty */
 export const areAccountsEmptySelector = createSelector(
   accountsSelector,
   accounts => accounts.every(isAccountEmpty),
@@ -451,6 +454,15 @@ export const orderedVisibleNftsSelector = createSelector(
     );
     return orderByLastReceived(accounts, visibleNfts);
   },
+);
+
+/**
+ * Returns a boolean that is true if and only if some of the accounts have an
+ * unconfirmed balance
+ */
+export const areSomeAccountsBalanceUnconfirmedSelector = createSelector(
+  accountsSelector,
+  accounts => accounts.some(isAccountBalanceUnconfirmed),
 );
 
 type Payload = AccountsPayload | SettingsBlacklistTokenPayload;
