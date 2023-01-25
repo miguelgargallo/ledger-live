@@ -31,6 +31,16 @@ export function useBalanceHistoryWithCountervalue({
   });
 }
 
+/** TODO: Optimise this, there is big to win here as the computation often takes a long time (>50ms sometimes or more)
+ * - split in 2 hooks: one that uses accounts from the store, one that uses accounts passed as params
+ * - move countervalues state to the redux store, (current implementation is with a useReducer passed to a context)
+ * - this way we will able to implement this hook using useSelector and one big memoised selector (with reselect),
+ *   which is much easier if all the data comes from the store.
+ *
+ *  - one step further would be to throttle the "accounts selection" part as today for a user with many accounts,
+ *    one "sync" produces many successive updates of `accounts` array at short intervals (<1s), thus resulting
+ *    in this computation here being done everytime, causing more dropped frames
+ */
 export function usePortfolio(
   accounts?: AccountLike[],
   options?: GetPortfolioOptionsType,
