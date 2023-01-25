@@ -26,4 +26,4 @@ const AssetsList = ({ assets }: ListProps) => {
   );
 };
 
-export default withDiscreetMode(AssetsList);
+export default React.memo(withDiscreetMode(AssetsList));
