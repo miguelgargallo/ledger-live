@@ -2,8 +2,6 @@ import React, { useCallback, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { isAccountEmpty } from "@ledgerhq/live-common/account/index";
-
 import { Flex, Icons, Text, Box } from "@ledgerhq/native-ui";
 import { ScrollView } from "react-native";
 import { snakeCase } from "lodash";
@@ -11,8 +9,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { NavigatorName, ScreenName } from "../../const";
 import {
   accountsCountSelector,
+  areAccountsEmptySelector,
   hasLendEnabledAccountsSelector,
-  accountsSelector,
 } from "../../reducers/accounts";
 import {
   hasOrderedNanoSelector,
@@ -34,12 +32,8 @@ export default function TransferDrawer({ onClose }: ModalProps) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount: number = useSelector(accountsCountSelector);
   const lendingEnabled = useSelector(hasLendEnabledAccountsSelector);
-  const accounts = useSelector(accountsSelector);
   const hasOrderedNano = useSelector(hasOrderedNanoSelector);
-  const areAccountsEmpty = useMemo(
-    () => accounts.every(isAccountEmpty),
-    [accounts],
-  );
+  const areAccountsEmpty = useSelector(areAccountsEmptySelector);
 
   const onNavigate = useCallback(
     (name: string, options?: object) => {

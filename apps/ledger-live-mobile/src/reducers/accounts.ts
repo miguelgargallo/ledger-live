@@ -25,6 +25,7 @@ import isEqual from "lodash/isEqual";
 import {
   addAccounts,
   canBeMigrated,
+  isAccountEmpty,
   flattenAccounts,
   getAccountCurrency,
   importAccountsReduce,
@@ -33,6 +34,8 @@ import {
   nestedSortAccounts,
   makeEmptyTokenAccount,
 } from "@ledgerhq/live-common/account/index";
+import { decodeNftId } from "@ledgerhq/live-common/nft/nftId";
+import { orderByLastReceived } from "@ledgerhq/live-common/nft/helpers";
 import type { AccountsState, State } from "./types";
 import type {
   AccountsDeleteAccountPayload,
@@ -48,6 +51,7 @@ import type {
 } from "../actions/types";
 import { AccountsActionTypes } from "../actions/types";
 import accountModel from "../logic/accountModel";
+import { hiddenNftCollectionsSelector } from "./settings";
 
 export const INITIAL_STATE: AccountsState = {
   active: [],
@@ -128,6 +132,18 @@ export const exportSelector = (s: State) => ({
   active: s.accounts.active.map(accountModel.encode),
 });
 
+/**
+ * Warning: use this selector directly in `useSelector` only if you really need
+ * the full data of all the accounts in your hook or component.
+ * For many needs, other more accurate and memoized selectors (see below) are
+ * available.
+ * Using these selectors will prevent unnecessary updates (causing a re-render)
+ * of your hook or component every time something somewhere in one of the
+ * accounts changes.
+ * This is important because the `accounts` array is modified at the end almost
+ * every account sync, so potentially you could avoid many unnessary and
+ * expensive re-renders.
+ */
 export const accountsSelector = (s: State): Account[] => s.accounts.active;
 
 // NB some components don't need to refresh every time an account is updated, usually it's only
@@ -169,6 +185,15 @@ export const accountsCountSelector = createSelector(
   accountsSelector,
   acc => acc.length,
 );
+export const hasNoAccountsSelector = createSelector(
+  accountsSelector,
+  acc => acc.length <= 0,
+);
+export const areAccountsEmptySelector = createSelector(
+  accountsSelector,
+  accounts => accounts.every(isAccountEmpty),
+);
+
 export const someAccountsNeedMigrationSelector = createSelector(
   accountsSelector,
   accounts => accounts.some(canBeMigrated),
@@ -389,6 +414,43 @@ export const hasLendEnabledAccountsSelector = createSelector(
         : null;
       return !!capabilities;
     }),
+);
+
+/**
+ * Returns the number of accounts with a positive balance.
+ */
+export const accountsWithPositiveBalanceSelector = createSelector(
+  accountsSelector,
+  acc => acc.filter(account => account.balance?.gt(0)).length,
+);
+
+/**
+ * Returns the list of all the NFTs from non hidden collections accross all
+ * accounts, ordered by last received.
+ *
+ * /!\ Use this with a deep equal comparison if possible as it will always
+ * return a new array if `accounts` or `hiddenNftCollections` changes.
+ *
+ * Example:
+ * ```
+ * import { isEqual } from "lodash";
+ * // ...
+ * const orderedVisibleNfts = useSelector(orderedVisibleNftsSelector, isEqual)
+ * ```
+ * */
+export const orderedVisibleNftsSelector = createSelector(
+  accountsSelector,
+  hiddenNftCollectionsSelector,
+  (accounts, hiddenNftCollections) => {
+    const nfts = accounts.map(a => a.nfts ?? []).flat();
+    const visibleNfts = nfts.filter(
+      nft =>
+        !hiddenNftCollections.includes(
+          `${decodeNftId(nft.id).accountId}|${nft.contract}`,
+        ),
+    );
+    return orderByLastReceived(accounts, visibleNfts);
+  },
 );
 
 type Payload = AccountsPayload | SettingsBlacklistTokenPayload;

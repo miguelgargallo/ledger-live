@@ -31,7 +31,7 @@ export function useBalanceHistoryWithCountervalue({
   });
 }
 
-/** TODO: Optimise this, there is big to win here as the computation often takes a long time (>50ms sometimes or more)
+/** TODO: HEAVY hook to optimise: there is big to win here as the computation often takes a long time (>50ms sometimes or more)
  * - split in 2 hooks: one that uses accounts from the store, one that uses accounts passed as params
  * - move countervalues state to the redux store, (current implementation is with a useReducer passed to a context)
  * - this way we will able to implement this hook using useSelector and one big memoised selector (with reselect),
