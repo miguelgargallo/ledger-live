@@ -328,4 +328,4 @@ const AssetScreen = ({ route }: NavigationProps) => {
   );
 };
 
-export default withDiscreetMode(AssetScreen);
+export default React.memo(withDiscreetMode(AssetScreen));

@@ -200,4 +200,4 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
   );
 };
 
-export default withDiscreetMode(ReadOnlyAssetScreen);
+export default React.memo(withDiscreetMode(ReadOnlyAssetScreen));
