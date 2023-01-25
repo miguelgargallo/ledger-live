@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Icons } from "@ledgerhq/native-ui";
 import { Buffer } from "buffer";
 import { useNavigation } from "@react-navigation/native";
+import Clipboard from "@react-native-community/clipboard";
 import { NavigatorName, ScreenName } from "../../../../const";
 import SettingsRow from "../../../../components/SettingsRow";
 
@@ -11,17 +12,12 @@ type Props = {
 };
 export default function ImportBridgeStreamData({ title, dataStr }: Props) {
   const navigation = useNavigation();
-  return (
-    <SettingsRow
-      title={title}
-      desc={dataStr ? "Import string detected" : "No import string detected"}
-      iconLeft={<Icons.ImportMedium size={24} color="black" />}
-      onPress={() => {
-        if (!dataStr) return;
 
-        const data = JSON.parse(
-          Buffer.from(dataStr, "base64").toString("utf8"),
-        );
+  const importString = useCallback(
+    (dataStr: Parameters<typeof Buffer.from>[0]) => {
+      try {
+        const utf8Str = Buffer.from(dataStr, "base64").toString("utf8");
+        const data = JSON.parse(utf8Str);
 
         navigation.navigate(NavigatorName.ImportAccounts, {
           screen: ScreenName.ScanAccounts,
@@ -29,7 +25,39 @@ export default function ImportBridgeStreamData({ title, dataStr }: Props) {
             data,
           },
         });
-      }}
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [navigation],
+  );
+
+  const importFromClipboard = useCallback(() => {
+    Clipboard.getString().then(str => {
+      importString(
+        str.startsWith("BRIDGESTREAM_DATA=")
+          ? str.replace("BRIDGESTREAM_DATA=", "")
+          : str,
+      );
+    });
+  }, [importString]);
+
+  const handlePress = useCallback(() => {
+    if (!dataStr) importFromClipboard();
+    importString(dataStr);
+  }, [dataStr, importFromClipboard, importString]);
+
+  return (
+    <SettingsRow
+      title={title}
+      desc={
+        dataStr
+          ? "Import string detected. Press to import it. Long press to import the string from the clipboard."
+          : "No import string detected. Press to import the string from the clipboard."
+      }
+      iconLeft={<Icons.ImportMedium size={24} color="black" />}
+      onPress={handlePress}
+      onLongPress={importFromClipboard}
     />
   );
 }
