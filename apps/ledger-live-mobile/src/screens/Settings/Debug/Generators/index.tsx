@@ -13,7 +13,7 @@ import Switch from "../../../../components/Switch";
 import { toggleMockIncident } from "../__mocks__/serviceStatus";
 import SettingsRow from "../../../../components/SettingsRow";
 
-export default function Debugging() {
+export default function Generators() {
   const { updateData, incidents } = useServiceStatus();
 
   return (
