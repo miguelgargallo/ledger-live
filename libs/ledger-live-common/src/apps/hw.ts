@@ -37,6 +37,7 @@ import {
 } from "../apps/logic";
 import { runAllWithProgress } from "../apps/runner";
 import type { ConnectAppEvent } from "../hw/connectApp";
+import getDeviceName from "../hw/getDeviceName";
 
 export const execWithTransport =
   (transport: Transport): Exec =>
@@ -478,6 +479,10 @@ export const listApps = (
         }
       }
 
+      // Harmless to run here since we are already in a secure channel, leading to
+      // no prompt for the user. Introduced for the device renaming for LLD.
+      const deviceName = await getDeviceName(transport);
+
       const result: ListAppsResult = {
         appByName,
         appsListNames,
@@ -487,6 +492,7 @@ export const listApps = (
         deviceModelId,
         firmware,
         customImageBlocks,
+        deviceName,
       };
       o.next({
         type: "result",
