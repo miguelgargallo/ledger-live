@@ -68,81 +68,73 @@ const EditDeviceName: React.FC<Props> = ({
   }, []);
 
   return (
-    <Drawer
-      isOpen={isOpen}
-      onClose={onCloseDrawer}
-      extraContainerProps={{ p: 0 }}
-      title={t("deviceRename.title", { productName })}
-      big
-    >
-      <Flex flex={1} flexDirection="column" justifyContent="space-between">
-        {completed ? (
-          <Flex
-            flex={1}
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            data-test-id="language-installed"
-          >
-            <BoxedIcon
-              Icon={Icons.CheckAloneMedium}
-              iconColor="success.c100"
-              size={64}
-              iconSize={24}
-            />
-            <Text
-              variant="large"
-              alignSelf="stretch"
-              mx={16}
-              mt={10}
-              textAlign="center"
-              fontSize={24}
-            >
-              {t("deviceRename.renamed", {
-                productName,
-                name,
-              })}
-            </Text>
-          </Flex>
-        ) : running ? (
-          <DeviceAction
-            device={device}
-            request={name}
-            action={action}
-            onClose={onClose}
-            onResult={onSuccess}
+    <Flex flex={1} flexDirection="column" justifyContent="space-between">
+      {completed ? (
+        <Flex
+          flex={1}
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          data-test-id="language-installed"
+        >
+          <BoxedIcon
+            Icon={Icons.CheckAloneMedium}
+            iconColor="success.c100"
+            size={64}
+            iconSize={24}
           />
-        ) : (
-          <Flex px={12} flexDirection="column">
-            <Box flow={1} mb={5}>
-              <Label htmlFor="currentDeviceName">{t("deviceRename.chooseName")}</Label>
-              <Input
-                autoFocus
-                data-test-id="current-device-name-input"
-                onChange={onChangeText}
-                value={name}
-                placeholder={t("deviceRename.placeholder")}
-                error={error && <TranslatedError error={error} field="title" noLink />}
-              />
-            </Box>
+          <Text
+            variant="large"
+            alignSelf="stretch"
+            mx={16}
+            mt={10}
+            textAlign="center"
+            fontSize={24}
+          >
+            {t("deviceRename.renamed", {
+              productName,
+              name,
+            })}
+          </Text>
+        </Flex>
+      ) : running ? (
+        <DeviceAction
+          device={device}
+          request={name}
+          action={action}
+          onClose={onClose}
+          onResult={onSuccess}
+        />
+      ) : (
+        <Flex px={12} flexDirection="column">
+          <Box flow={1} mb={5}>
+            <Label htmlFor="currentDeviceName">{t("deviceRename.chooseName")}</Label>
+            <Input
+              autoFocus
+              data-test-id="current-device-name-input"
+              onChange={onChangeText}
+              value={name}
+              placeholder={t("deviceRename.placeholder")}
+              error={error && <TranslatedError error={error} field="title" noLink />}
+            />
+          </Box>
+        </Flex>
+      )}
+      {(!running || completed) && (
+        <Flex flexDirection="column" rowGap={8}>
+          <Divider variant="light" />
+          <Flex alignSelf="end" px={12} pb={8}>
+            <Button
+              variant="main"
+              onClick={completed ? onCloseDrawer : onSubmit}
+              disabled={disableButton}
+            >
+              {completed ? t(`common.close`) : t(`common.continue`)}
+            </Button>
           </Flex>
-        )}
-        {(!running || completed) && (
-          <Flex flexDirection="column" rowGap={8}>
-            <Divider variant="light" />
-            <Flex alignSelf="end" px={12} pb={8}>
-              <Button
-                variant="main"
-                onClick={completed ? onCloseDrawer : onSubmit}
-                disabled={disableButton}
-              >
-                {completed ? t(`common.close`) : t(`common.continue`)}
-              </Button>
-            </Flex>
-          </Flex>
-        )}
-      </Flex>
-    </Drawer>
+        </Flex>
+      )}
+    </Flex>
   );
 };
 
