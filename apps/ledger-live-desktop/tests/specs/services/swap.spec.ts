@@ -62,7 +62,7 @@ test.describe.parallel("Swap", () => {
 
     await test.step("Add account from missing Destination (To) account", async () => {
       await swapPage.addDestinationAccount();
-      await expect.soft(page).toHaveScreenshot("swap-pair-reversed.png");
+      await expect.soft(page).toHaveScreenshot("add-missing-destination-account.png");
     });
   });
 
