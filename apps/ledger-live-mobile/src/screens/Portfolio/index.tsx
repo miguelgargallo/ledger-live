@@ -49,6 +49,7 @@ import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import CollapsibleHeaderFlatList from "../../components/WalletTab/CollapsibleHeaderFlatList";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import useDynamicContent from "../../dynamicContent/dynamicContent";
+import PortfolioOperationsHistorySection from "./PortfolioOperationsHistorySection";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -202,7 +203,7 @@ function PortfolioScreen({ navigation }: NavigationProps) {
             </SectionContainer>,
             <SectionContainer px={6} mb={8} isLast>
               <SectionTitle title={t("analytics.operations.title")} />
-              <OperationsHistorySection accounts={accounts} />
+              <PortfolioOperationsHistorySection />
             </SectionContainer>,
           ]
         : [
@@ -226,7 +227,6 @@ function PortfolioScreen({ navigation }: NavigationProps) {
       distribution.list.length,
       openAddModal,
       isAWalletCardDisplayed,
-      accounts,
       goToAssets,
     ],
   );
