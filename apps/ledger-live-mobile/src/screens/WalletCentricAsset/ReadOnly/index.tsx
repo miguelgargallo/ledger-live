@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback, useEffect } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import { FlatList, LayoutChangeEvent } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
@@ -10,7 +10,6 @@ import { Flex } from "@ledgerhq/native-ui";
 import { getCurrencyColor } from "@ledgerhq/live-common/currencies/index";
 import { useTheme } from "styled-components/native";
 import { Currency } from "@ledgerhq/types-cryptoassets";
-import { useSingleCoinMarketData } from "@ledgerhq/live-common/market/MarketDataProvider";
 import BigNumber from "bignumber.js";
 import accountSyncRefreshControl from "../../../components/accountSyncRefreshControl";
 import { withDiscreetMode } from "../../../context/DiscreetModeContext";
@@ -19,7 +18,6 @@ import TabBarSafeAreaView, {
 } from "../../../components/TabBar/TabBarSafeAreaView";
 import SectionContainer from "../../WalletCentricSections/SectionContainer";
 import SectionTitle from "../../WalletCentricSections/SectionTitle";
-import MarketPriceSection from "../../WalletCentricSections/MarketPrice";
 import EmptyAccountCard from "../../Account/EmptyAccountCard";
 import AssetCentricGraphCard from "../../../components/AssetCentricGraphCard";
 import CurrencyBackgroundGradient from "../../../components/CurrencyBackgroundGradient";
@@ -42,6 +40,7 @@ import {
 } from "../../../components/RootNavigator/types/helpers";
 import { AccountsNavigatorParamList } from "../../../components/RootNavigator/types/AccountsNavigator";
 import { ScreenName } from "../../../const";
+import AssetMarketSection from "../AssetMarketSection";
 
 type NavigationProps = BaseComposite<
   StackNavigatorProps<AccountsNavigatorParamList, ScreenName.Asset>
@@ -50,12 +49,6 @@ type NavigationProps = BaseComposite<
 const AnimatedFlatListWithRefreshControl = Animated.createAnimatedComponent(
   accountSyncRefreshControl(FlatList),
 );
-
-// @FIXME workarround for main tokens
-const tokenIDToMarketID = {
-  "ethereum/erc20/usd_tether__erc20_": "tether",
-  "ethereum/erc20/usd__coin": "usd",
-};
 
 const currencyBalanceBigNumber = BigNumber(0);
 
@@ -70,17 +63,6 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
   );
 
   const assetPortfolio = usePortfolio([], {});
-  const { selectedCoinData, selectCurrency, counterCurrency } =
-    useSingleCoinMarketData();
-
-  useEffect(() => {
-    selectCurrency(
-      tokenIDToMarketID[currency.id as keyof typeof tokenIDToMarketID] ||
-        currency.id,
-      undefined,
-      "24h",
-    );
-  }, [currency, selectCurrency]);
 
   const [graphCardEndPosition, setGraphCardEndPosition] = useState(100);
   const currentPositionY = useSharedValue(0);
@@ -107,7 +89,7 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
           accountsEmpty={true}
         />
       </Flex>,
-      <SectionContainer px={6}>
+      <SectionContainer px={6} isFirst>
         <SectionTitle
           title={t("account.quickActions")}
           containerProps={{ mb: 6 }}
@@ -117,25 +99,8 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
           <EmptyAccountCard currencyTicker={currency.ticker} />
         </Flex>
       </SectionContainer>,
-      ...(selectedCoinData?.price
-        ? [
-            <SectionContainer px={6}>
-              <SectionTitle
-                title={t("portfolio.marketPriceSection.title", {
-                  currencyTicker: currency.ticker,
-                })}
-              />
-              <Flex minHeight={65}>
-                <MarketPriceSection
-                  currency={currency}
-                  selectedCoinData={selectedCoinData}
-                  counterCurrency={counterCurrency}
-                />
-              </Flex>
-            </SectionContainer>,
-          ]
-        : []),
-      <SectionContainer mx={6} isLast>
+      <AssetMarketSection currency={currency} />,
+      <SectionContainer mx={6}>
         {hasOrderedNano ? (
           <SetupDeviceBanner screen="Assets" />
         ) : (
@@ -167,8 +132,6 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
       graphCardEndPosition,
       currency,
       t,
-      selectedCoinData,
-      counterCurrency,
       hasOrderedNano,
     ],
   );
