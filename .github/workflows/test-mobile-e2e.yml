@@ -182,6 +182,7 @@ jobs:
         env:
           DEVICE_NAME: Pixel_5_API_31
         run: |
+          echo $ANDROID_AVD_HOME
           sdkmanager --install "system-images;android-31;default;x86_64" "build-tools;33.0.0" platform-tools "platforms;android-31"
           yes | sdkmanager --licenses
           sdkmanager --install emulator
@@ -204,7 +205,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Create Emulator
         run: |
-          $ANDROID_HOME/emulator emulator --verbose --no-boot-anim --no-audio --no-window --gpu swiftshader_indirect --camera-back none @Pixel_5_API_31 &
+          $ANDROID_HOME/emulator/emulator --verbose --no-boot-anim --no-audio --no-window --gpu swiftshader_indirect --camera-back none @Pixel_5_API_31 &
           booted=0
           while [ "$booted" != "1" ]
           do
@@ -252,9 +253,9 @@ jobs:
       - name: Run Android tests
         run: |
           pnpm mobile e2e:test -c android.emu.release --record-logs all --take-screenshots all --record-videos failing --forceExit --detectOpenHandles --cleanup --headless
-      # - name: Close the emulator
-      #   run: |
-      #     killall qemu-system-x86_64-headless
+      - name: Close the emulator
+        run: |
+          killall qemu-system-x86_64-headless
       # - name: Upload test artifacts
       #   if: always()
       #   uses: actions/upload-artifact@v2
