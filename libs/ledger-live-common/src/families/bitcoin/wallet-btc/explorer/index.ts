@@ -6,11 +6,7 @@ import genericPool, { Pool } from "generic-pool";
 import JSONBigNumber from "@ledgerhq/json-bignumber";
 import { Address, Block, TX } from "../storage/types";
 import { IExplorer } from "./types";
-import {
-  requestInterceptor,
-  responseInterceptor,
-  errorInterceptor,
-} from "../../../../network";
+import { errorInterceptor } from "../../../../network";
 
 type ExplorerParams = {
   no_token?: string;
@@ -82,8 +78,7 @@ class BitcoinLikeExplorer implements IExplorer {
     }
 
     // Logging
-    client.interceptors.request.use(requestInterceptor);
-    client.interceptors.response.use(responseInterceptor, errorInterceptor);
+    client.interceptors.response.use(undefined, errorInterceptor);
   }
 
   async broadcast(tx: string): Promise<{ data: { result: string } }> {
