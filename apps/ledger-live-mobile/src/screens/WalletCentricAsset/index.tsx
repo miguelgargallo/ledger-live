@@ -19,6 +19,8 @@ import { Currency } from "@ledgerhq/types-cryptoassets";
 import { useNavigation } from "@react-navigation/native";
 import { useSingleCoinMarketData } from "@ledgerhq/live-common/market/MarketDataProvider";
 import { Account, TokenAccount } from "@ledgerhq/types-live";
+import { isEqual } from "lodash";
+import BigNumber from "bignumber.js";
 import accountSyncRefreshControl from "../../components/accountSyncRefreshControl";
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
 import TabBarSafeAreaView, {
@@ -67,19 +69,18 @@ const AssetScreen = ({ route }: NavigationProps) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const navigation = useNavigation<NavigationProps["navigation"]>();
-  const useCounterValue = useSelector(countervalueFirstSelector);
+  const shouldUseCounterValue = useSelector(countervalueFirstSelector);
   const { currency } = route?.params;
   const isCryptoCurrency = currency?.type === "CryptoCurrency";
   const cryptoAccounts = useSelector(
     flattenAccountsByCryptoCurrencyScreenSelector(currency),
+    isEqual,
   );
-  const defaultAccount = useMemo(
-    () =>
-      cryptoAccounts && cryptoAccounts.length === 1
-        ? cryptoAccounts[0]
-        : undefined,
-    [cryptoAccounts],
-  );
+
+  const defaultAccount =
+    cryptoAccounts && cryptoAccounts.length === 1
+      ? cryptoAccounts[0]
+      : undefined;
 
   const counterValueCurrency: Currency = useSelector(
     counterValueCurrencySelector,
@@ -111,6 +112,12 @@ const AssetScreen = ({ route }: NavigationProps) => {
   const handleScroll = useAnimatedScrollHandler(event => {
     currentPositionY.value = event.contentOffset.y;
   });
+
+  const currencyBalanceBigNumber = useMemo(
+    () =>
+      cryptoAccounts.reduce((acc, val) => acc.plus(val.balance), BigNumber(0)),
+    [cryptoAccounts],
+  );
 
   const currencyBalance = useMemo(
     () => cryptoAccounts.reduce((acc, val) => acc + val.balance.toNumber(), 0),
@@ -319,10 +326,8 @@ const AssetScreen = ({ route }: NavigationProps) => {
         currentPositionY={currentPositionY}
         graphCardEndPosition={graphCardEndPosition}
         currency={currency}
-        useCounterValue={useCounterValue}
-        assetPortfolio={assetPortfolio}
-        currencyBalance={currencyBalance}
-        counterValueCurrency={counterValueCurrency}
+        shouldUseCounterValue={shouldUseCounterValue}
+        currencyBalance={currencyBalanceBigNumber}
       />
     </TabBarSafeAreaView>
   );

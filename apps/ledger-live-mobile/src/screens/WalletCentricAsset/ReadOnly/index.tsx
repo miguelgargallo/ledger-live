@@ -11,6 +11,7 @@ import { getCurrencyColor } from "@ledgerhq/live-common/currencies/index";
 import { useTheme } from "styled-components/native";
 import { Currency } from "@ledgerhq/types-cryptoassets";
 import { useSingleCoinMarketData } from "@ledgerhq/live-common/market/MarketDataProvider";
+import BigNumber from "bignumber.js";
 import accountSyncRefreshControl from "../../../components/accountSyncRefreshControl";
 import { withDiscreetMode } from "../../../context/DiscreetModeContext";
 import TabBarSafeAreaView, {
@@ -55,6 +56,8 @@ const tokenIDToMarketID = {
   "ethereum/erc20/usd_tether__erc20_": "tether",
   "ethereum/erc20/usd__coin": "usd",
 };
+
+const currencyBalanceBigNumber = BigNumber(0);
 
 const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
   const { t } = useTranslation();
@@ -191,10 +194,8 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
         currentPositionY={currentPositionY}
         graphCardEndPosition={graphCardEndPosition}
         currency={currency}
-        useCounterValue={useCounterValue}
-        assetPortfolio={assetPortfolio}
-        currencyBalance={0}
-        counterValueCurrency={counterValueCurrency}
+        shouldUseCounterValue={useCounterValue}
+        currencyBalance={currencyBalanceBigNumber}
       />
     </TabBarSafeAreaView>
   );

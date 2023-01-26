@@ -9,8 +9,8 @@ import {
 } from "@ledgerhq/native-ui/assets/icons";
 import { getCurrencyColor } from "@ledgerhq/live-common/currencies/index";
 import { useTranslation } from "react-i18next";
-import { Portfolio } from "@ledgerhq/types-live";
 import Animated from "react-native-reanimated";
+import BigNumber from "bignumber.js";
 import Touchable from "../../components/Touchable";
 import { ScreenName } from "../../const";
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
@@ -19,41 +19,24 @@ import { track } from "../../analytics";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Placeholder from "../../components/Placeholder";
 import CurrencyHeaderLayout from "../../components/CurrencyHeaderLayout";
+import CounterValue from "../../components/CounterValue";
 
 function Header({
   currentPositionY,
   graphCardEndPosition,
   currency,
-  assetPortfolio,
-  counterValueCurrency,
-  useCounterValue,
+  shouldUseCounterValue,
   currencyBalance,
 }: {
   currentPositionY: Animated.SharedValue<number>;
   graphCardEndPosition: number;
   currency: Currency;
-  assetPortfolio: Portfolio;
-  counterValueCurrency: Currency;
-  useCounterValue?: boolean;
-  currencyBalance: number;
+  shouldUseCounterValue?: boolean;
+  currencyBalance: BigNumber;
 }) {
   const navigation = useNavigation();
   const { t } = useTranslation();
 
-  const { balanceHistory } = assetPortfolio;
-  const item = balanceHistory[balanceHistory.length - 1];
-
-  const unit = counterValueCurrency.units[0];
-
-  const currencyUnitValueProps = useCounterValue
-    ? {
-        unit,
-        value: item?.value,
-      }
-    : {
-        unit: currency.units[0],
-        value: currencyBalance,
-      };
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const onBackButtonPress = useCallback(() => {
@@ -93,7 +76,7 @@ function Header({
       }
       centerAfterScrollElement={
         <Flex flexDirection={"column"} alignItems={"center"}>
-          {balanceHistory ? (
+          {currencyBalance ? (
             <>
               <Text
                 variant={"small"}
@@ -111,7 +94,15 @@ function Header({
                 fontSize="18px"
                 numberOfLines={1}
               >
-                <CurrencyUnitValue {...currencyUnitValueProps} />
+                {shouldUseCounterValue ? (
+                  <CounterValue currency={currency} value={currencyBalance} />
+                ) : (
+                  <CurrencyUnitValue
+                    showCode
+                    unit={currency.units[0]}
+                    value={currencyBalance}
+                  />
+                )}
               </Text>
             </>
           ) : (
@@ -134,4 +125,4 @@ function Header({
   );
 }
 
-export default withDiscreetMode(Header);
+export default React.memo(withDiscreetMode(Header));
