@@ -47,10 +47,25 @@ const INITIAL_STATE: State = {
   protect: protectState,
 };
 
+let accountsChangedCount = 0;
+const logger = store => next => action => {
+  const oldAccounts = store?.getState()?.accounts?.active;
+  const res = next(action);
+  const newAccounts = store?.getState()?.accounts?.active;
+  if (oldAccounts !== newAccounts) {
+    console.log(
+      new Date().toISOString(),
+      "ACCOUNTS CHANGED",
+      ++accountsChangedCount,
+    );
+  }
+  return res;
+};
+
 export const store = createStore(
   reducers,
   INITIAL_STATE,
-  compose(applyMiddleware(thunk)),
+  compose(applyMiddleware(thunk, logger)),
 );
 
 export type StoreType = typeof store;
