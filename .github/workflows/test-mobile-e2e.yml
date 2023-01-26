@@ -178,9 +178,9 @@ jobs:
           cache: "gradle"
       - name: setup Android SDK
         uses: android-actions/setup-android@v2.0.8
-      - name: set ANDROID_AVD_HOME env
-        run: |
-          echo "ANDROID_AVD_HOME=$ANDROID_HOME/../avd" >> $GITHUB_ENV
+      # - name: set ANDROID_AVD_HOME env
+      #   run: |
+      #     echo "ANDROID_AVD_HOME=$ANDROID_HOME/../avd" >> $GITHUB_ENV
       # - name: Create SDK
       #   env:
       #     DEVICE_NAME: Pixel_5_API_31
@@ -223,7 +223,9 @@ jobs:
       #     adb shell settings put system pointer_location 1
       #     adb root
       - name: create AVD and generate snapshot for caching
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@v2.27.0
+        env:
+          ANDROID_AVD_HOME: /root/.android
         with:
           api-level: 31
           arch: x86_64
