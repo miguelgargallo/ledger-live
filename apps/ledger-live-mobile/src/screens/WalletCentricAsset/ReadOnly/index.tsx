@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 import { Flex } from "@ledgerhq/native-ui";
 import { getCurrencyColor } from "@ledgerhq/live-common/currencies/index";
 import { useTheme } from "styled-components/native";
-import { Currency } from "@ledgerhq/types-cryptoassets";
 import BigNumber from "bignumber.js";
+import { AccountLike } from "@ledgerhq/types-live";
 import accountSyncRefreshControl from "../../../components/accountSyncRefreshControl";
 import { withDiscreetMode } from "../../../context/DiscreetModeContext";
 import TabBarSafeAreaView, {
@@ -19,12 +19,9 @@ import TabBarSafeAreaView, {
 import SectionContainer from "../../WalletCentricSections/SectionContainer";
 import SectionTitle from "../../WalletCentricSections/SectionTitle";
 import EmptyAccountCard from "../../Account/EmptyAccountCard";
-import AssetCentricGraphCard from "../../../components/AssetCentricGraphCard";
 import CurrencyBackgroundGradient from "../../../components/CurrencyBackgroundGradient";
 import Header from "../Header";
-import { usePortfolio } from "../../../hooks/portfolio";
 import {
-  counterValueCurrencySelector,
   countervalueFirstSelector,
   hasOrderedNanoSelector,
 } from "../../../reducers/settings";
@@ -41,6 +38,7 @@ import {
 import { AccountsNavigatorParamList } from "../../../components/RootNavigator/types/AccountsNavigator";
 import { ScreenName } from "../../../const";
 import AssetMarketSection from "../AssetMarketSection";
+import AssetGraph from "../AssetGraph";
 
 type NavigationProps = BaseComposite<
   StackNavigatorProps<AccountsNavigatorParamList, ScreenName.Asset>
@@ -51,18 +49,13 @@ const AnimatedFlatListWithRefreshControl = Animated.createAnimatedComponent(
 );
 
 const currencyBalanceBigNumber = BigNumber(0);
+const accounts: AccountLike[] = [];
 
 const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
   const { t } = useTranslation();
   const currency = route?.params?.currency;
   const { colors } = useTheme();
   const useCounterValue = useSelector(countervalueFirstSelector);
-
-  const counterValueCurrency: Currency = useSelector(
-    counterValueCurrencySelector,
-  );
-
-  const assetPortfolio = usePortfolio([], {});
 
   const [graphCardEndPosition, setGraphCardEndPosition] = useState(100);
   const currentPositionY = useSharedValue(0);
@@ -79,14 +72,13 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
   const data = useMemo(
     () => [
       <Flex mt={6} onLayout={onAssetCardLayout}>
-        <AssetCentricGraphCard
-          assetPortfolio={assetPortfolio}
-          counterValueCurrency={counterValueCurrency}
+        <AssetGraph
           currentPositionY={currentPositionY}
           graphCardEndPosition={graphCardEndPosition}
           currency={currency}
           currencyBalance={0}
-          accountsEmpty={true}
+          accounts={accounts}
+          accountsAreEmpty
         />
       </Flex>,
       <SectionContainer px={6} isFirst>
@@ -126,8 +118,6 @@ const ReadOnlyAssetScreen = ({ route }: NavigationProps) => {
     ],
     [
       onAssetCardLayout,
-      assetPortfolio,
-      counterValueCurrency,
       currentPositionY,
       graphCardEndPosition,
       currency,
